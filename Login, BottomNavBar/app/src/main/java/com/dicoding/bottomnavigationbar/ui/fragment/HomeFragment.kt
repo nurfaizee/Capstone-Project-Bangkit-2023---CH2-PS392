@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.dicoding.bottomnavigationbar.BMIActivity
 import com.dicoding.bottomnavigationbar.R
+import com.dicoding.bottomnavigationbar.ui.DaftarAhliGizi
 
 class HomeFragment : Fragment() {
 
@@ -21,17 +22,25 @@ class HomeFragment : Fragment() {
 
         // Find the Button by ID
         val bmiButton: Button = view.findViewById(R.id.bmiButton)
-
+        val ahligiziButton: Button = view.findViewById(R.id.ahligiziButton)
         // Set click listener for the button
         bmiButton.setOnClickListener {
             // Call method to start BMI activity
             startBmiActivity()
+        }
+        ahligiziButton.setOnClickListener {
+            // Call method to start BMI activity
+            startDaftarAhligizi()
         }
 
         return view
     }
     private fun startBmiActivity() {
         val intent = Intent(activity, BMIActivity::class.java)
+        startActivity(intent)
+    }
+    private fun startDaftarAhligizi() {
+        val intent = Intent(activity, DaftarAhliGizi::class.java)
         startActivity(intent)
     }
 }
