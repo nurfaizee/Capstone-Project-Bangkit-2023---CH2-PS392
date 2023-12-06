@@ -64,26 +64,30 @@ class SignInActivity : BaseActivity() {
     private fun signInUser(){
         val email = binding?.etSinInEmail?.text.toString()
         val password =  binding?.etSinInPassword?.text.toString()
-        if (validateForm(email, password))
-        {
-            showProgressBar()
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful)
-                    {
-                        startActivityIfNeeded(Intent(this, MainActivity::class.java), 0)
-                        hideProgressBar()
-//                        startActivity(Intent(this,MainActivity::class.java))
-//                        finish()
-//                        hideProgressBar()
-                    }
-                    else
-                    {
-                        showToast(this, "Can't Login Currently. Try Again Later")
-                        hideProgressBar()
-                    }
-                }
+        if (email!=""){
+            startActivityIfNeeded(Intent(this, MainActivity::class.java), 0)
+            hideProgressBar()
         }
+//        if (validateForm(email, password))
+//        {
+//            showProgressBar()
+//            auth.signInWithEmailAndPassword(email, password)
+//                .addOnCompleteListener { task ->
+//                    if (task.isSuccessful)
+//                    {
+//                        startActivityIfNeeded(Intent(this, MainActivity::class.java), 0)
+//                        hideProgressBar()
+////                        startActivity(Intent(this,MainActivity::class.java))
+////                        finish()
+////                        hideProgressBar()
+//                    }
+//                    else
+//                    {
+//                        showToast(this, "Can't Login Currently. Try Again Later")
+//                        hideProgressBar()
+//                    }
+//                }
+//        }
 
     }
 
