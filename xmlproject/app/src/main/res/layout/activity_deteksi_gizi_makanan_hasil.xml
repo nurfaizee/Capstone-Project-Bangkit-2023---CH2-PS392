@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp">
+
+    <ImageView
+        android:id="@+id/imageDetail"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:contentDescription="Deteksi Image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/baseline_insert_photo_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Buah Apel"
+        android:textColor="@color/blue"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageDetail" />
+
+    <GridLayout
+        android:id="@+id/gl_detail_gizi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="5"
+        android:rowCount="1"
+        android:paddingVertical="10dp"
+        android:background="@drawable/grid_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail_name">
+
+        <TextView
+            android:id="@+id/kkal"
+            android:text="680 Kkal"
+            android:layout_width="0dp"
+            android:layout_gravity="fill"
+            android:gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:layout_width="1dp"
+            android:background="#D9D9D9"
+            android:layout_columnSpan="1" />
+        <TextView
+            android:id="@+id/protein"
+            android:text="0 Protein"
+            android:layout_width="0dp"
+            android:layout_gravity="fill"
+            android:gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+        <TextView
+            android:layout_width="1dp"
+            android:background="#D9D9D9"
+            android:layout_columnSpan="1" />
+        <TextView
+            android:id="@+id/lemak"
+            android:text="0 Lemak"
+            android:layout_width="0dp"
+            android:layout_gravity="fill"
+            android:gravity="center"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"/>
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btn_selanjutnya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Selanjutnya"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gl_detail_gizi" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
