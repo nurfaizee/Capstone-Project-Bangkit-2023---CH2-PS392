@@ -14,13 +14,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.app.Activity
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.dicoding.bottomnavigationbar.ui.Retrofit.Retro
+import com.dicoding.bottomnavigationbar.ui.Retrofit.UserApi
+import com.dicoding.bottomnavigationbar.ui.Retrofit.UsersResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignInActivity : BaseActivity() {
 
@@ -61,34 +68,43 @@ class SignInActivity : BaseActivity() {
 
     }
 
-    private fun signInUser(){
+    private fun signInUser() {
         val email = binding?.etSinInEmail?.text.toString()
-        val password =  binding?.etSinInPassword?.text.toString()
-        if (email!=""){
-            startActivityIfNeeded(Intent(this, MainActivity::class.java), 0)
-            hideProgressBar()
-        }
-//        if (validateForm(email, password))
-//        {
-//            showProgressBar()
-//            auth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener { task ->
-//                    if (task.isSuccessful)
-//                    {
-//                        startActivityIfNeeded(Intent(this, MainActivity::class.java), 0)
-//                        hideProgressBar()
-////                        startActivity(Intent(this,MainActivity::class.java))
-////                        finish()
-////                        hideProgressBar()
-//                    }
-//                    else
-//                    {
-//                        showToast(this, "Can't Login Currently. Try Again Later")
-//                        hideProgressBar()
-//                    }
-//                }
-//        }
+        val password = binding?.etSinInPassword?.text.toString()
+        showProgressBar()
+        if (validateForm(email, password)) {
+            val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
+            retro.login(email = email, password = password).enqueue(object : Callback<UsersResponse> {
+                override fun onResponse(call: Call<UsersResponse>, response: Response<UsersResponse>) {
+                    if (response.isSuccessful) {
+                        val userResponse = response.body()
 
+                        if (userResponse != null) {
+                            val user = userResponse.user
+
+                            if (user != null) {
+                                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                                Log.i("token", userResponse.accessToken!!)
+                                Log.i("email", user.email!!)
+                                hideProgressBar()
+                                // Process the data
+                            } else {
+                                // Handle null user in the response body
+                            }
+                        } else {
+                            // Handle null response body
+                        }
+                    } else {
+                        // Handle unsuccessful response
+                    }
+                }
+
+                override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
+                    // Handle failure
+                    Log.e("Error", t.message!!)
+                }
+            })
+        }
     }
 
     private fun signInWithGoogle()

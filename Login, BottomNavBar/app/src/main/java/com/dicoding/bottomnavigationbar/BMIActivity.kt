@@ -25,9 +25,9 @@ class BMIActivity : AppCompatActivity() {
                 val weight = weightStr.toFloat()
                 val height = heightStr.toFloat()
 
-                val bmi = calculateBMI(weight, height)
+                val bmi = calculateBMI(weight, height/100)
                 val category = getCategory(bmi)
-                textViewResult.text = "BMI Result: $bmi\\nCategory: $category"
+                textViewResult.text = "$category"
             } else {
                 textViewResult.text = "Please enter both weight and height."
             }
