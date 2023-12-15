@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.AhliGizi
-import com.dicoding.bottomnavigationbar.data.ListAhliGiziAdapter
-import com.dicoding.bottomnavigationbar.ui.main.MainActivity
+import com.dicoding.bottomnavigationbar.data.AhliGiziAdapter
 
 class DaftarAhliGizi : AppCompatActivity() {
     private lateinit var rvAhligizi: RecyclerView
@@ -40,10 +39,10 @@ class DaftarAhliGizi : AppCompatActivity() {
     }
     private fun showRecyclerList() {
         rvAhligizi.layoutManager = LinearLayoutManager(this)
-        val listAhliGiziAdapter = ListAhliGiziAdapter(list)
-        rvAhligizi.adapter = listAhliGiziAdapter
+        val ahliGiziAdapter = AhliGiziAdapter(list)
+        rvAhligizi.adapter = ahliGiziAdapter
 
-        listAhliGiziAdapter.setOnItemClickCallback(object : ListAhliGiziAdapter.OnItemClickCallback {
+        ahliGiziAdapter.setOnItemClickCallback(object : AhliGiziAdapter.OnItemClickCallback {
             override fun onItemClicked(data: AhliGizi) {
                 val intentToDetail = Intent(this@DaftarAhliGizi, DetailAhliGiziActivity::class.java)
                 intentToDetail.putExtra("DATA", data)

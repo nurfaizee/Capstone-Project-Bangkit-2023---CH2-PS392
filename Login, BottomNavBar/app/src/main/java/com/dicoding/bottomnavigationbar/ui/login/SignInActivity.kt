@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
 import androidx.activity.result.contract.ActivityResultContracts
@@ -69,9 +71,16 @@ class SignInActivity : BaseActivity() {
             signInWithGoogle()
         }
 
-    }
+        binding?.seePassword?.setOnCheckedChangeListener { _, isChecked ->
+            binding?.etSinInPassword?.transformationMethod = if (isChecked) {
+                HideReturnsTransformationMethod.getInstance()
+            } else {
+                PasswordTransformationMethod.getInstance()
+            }
+            binding?.etSinInPassword?.text?.let { binding?.etSinInPassword?.setSelection(it.length) }
+        }
 
-    // Assuming loginManager is an instance of LoginManager
+    }
 
     private fun signInUser() {
         val email = binding?.etSinInEmail?.text.toString()
@@ -164,15 +173,15 @@ class SignInActivity : BaseActivity() {
     {
         return when {
             TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()->{
-                binding?.tilEmail?.error = "Enter valid email address"
+                binding?.etSinInEmail?.error = "Enter valid email address"
                 false
             }
             TextUtils.isEmpty(password)->{
-                binding?.tilPassword?.error = "Enter password"
+                binding?.etSinInPassword?.error = "Enter password"
                 false
             }
             else -> {
-                binding?.tilEmail?.error = null
+                binding?.etSinInEmail?.error = null
                 true
             }
         }

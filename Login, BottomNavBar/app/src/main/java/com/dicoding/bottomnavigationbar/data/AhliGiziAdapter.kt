@@ -9,8 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.bottomnavigationbar.R
 import com.bumptech.glide.Glide
 
-class ListAhliGiziAdapter(private val listAhliGizi: ArrayList<AhliGizi>) : RecyclerView.Adapter<ListAhliGiziAdapter.ListViewHolder>() {
+class AhliGiziAdapter(private val listAhliGizi: ArrayList<AhliGizi>) : RecyclerView.Adapter<AhliGiziAdapter.ListViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
+
+    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val tvName: TextView = itemView.findViewById(R.id.tv_nama_dokter)
+        val tvRumahSakit: TextView = itemView.findViewById(R.id.tv_rs)
+        val tvNomor: TextView = itemView.findViewById(R.id.tv_telp)
+        val tvJadwal: TextView = itemView.findViewById(R.id.tv_jadwal)
+        val imgPhoto: ImageView = itemView.findViewById(R.id.iv_dokter)
+    }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback}
@@ -30,14 +38,6 @@ class ListAhliGiziAdapter(private val listAhliGizi: ArrayList<AhliGizi>) : Recyc
         holder.tvJadwal.text = jadwal
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listAhliGizi[holder.adapterPosition]) }    }
     override fun getItemCount(): Int = listAhliGizi.size
-
-    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvName: TextView = itemView.findViewById(R.id.tv_nama_dokter)
-        val tvRumahSakit: TextView = itemView.findViewById(R.id.tv_rs)
-        val tvNomor: TextView = itemView.findViewById(R.id.tv_telp)
-        val tvJadwal: TextView = itemView.findViewById(R.id.tv_jadwal)
-        val imgPhoto: ImageView = itemView.findViewById(R.id.iv_dokter)
-    }
     interface OnItemClickCallback {
         fun onItemClicked(data: AhliGizi)
     }

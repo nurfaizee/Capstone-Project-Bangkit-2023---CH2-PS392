@@ -2,31 +2,14 @@
     <string name="app_name">Bottom Navigation Bar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="emailFormatWrong">Wrong email format</string>
+    <string name="emailTaken">The email you entered is already registered, please change your email</string>
+    <string name="passwordLess">Password must be at least 8 characters</string>
+    <string name="nameNone">Name cannot be empty</string>
 
     <string name="get_started_text">Show your\n responsibility\n towards society</string>
     <string name="forgot_password_msg">Don\'t worry! it happens. Please enter the email address associated with your account.</string>
     <string name="on_submit_msg">Check out your mailbox, you will receive an email containing link where you can reset your password</string>
-    <string-array name="data_name">
-        <item>Dr.Johan</item>
-        <item>Dr Michel</item>
-
-    </string-array>
-    <string-array name="data_rumahsakit">
-        <item>Rs.Sehat Bahagia</item>
-        <item>Rs.Sentosa</item>
-
-    </string-array>
-    <string-array name="data_nomor">
-        <item>0895389528226</item>
-        <item>08819891602</item>
-    </string-array>
-    <string-array name="data_jadwal">
-        <item>Senin-Jumat,08:00-15:00</item>
-        <item>Senin-Kamis,08:00-15:00</item>
-    </string-array>
-    <string-array name="data_gambar">
-        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
-        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
-    </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
