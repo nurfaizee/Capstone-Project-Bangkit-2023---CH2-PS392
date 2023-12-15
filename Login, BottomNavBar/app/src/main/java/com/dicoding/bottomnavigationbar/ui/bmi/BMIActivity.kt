@@ -83,11 +83,11 @@ class BMIActivity : AppCompatActivity() {
 
     private fun getMessage(category: String): String {
         return when (category) {
-            "Underweight" -> "Your child is underweight. Consider consulting with a healthcare professional for guidance."
-            "Normal weight" -> "Your child has a normal weight. Keep up the good work!"
-            "Excess weight" -> "Your child is overweight. Consider adopting a healthier lifestyle and consult with a healthcare professional."
-            "Obesity" -> "Your child is in the obese category. It's crucial to address this issue. Consult with a healthcare professional for guidance."
-            "Extremely Obese" -> "Your child is in the obese category. It's crucial to address this issue. Consult with a healthcare professional for guidance."
+            "Underweight" -> "saran if Underweight"
+            "Normal weight" -> "saran if normal Weight"
+            "Excess weight" -> "saran if excess weight"
+            "Obesity" -> "saran if obesity"
+            "Extremely Obese" -> "saran if extremely"
             else -> ""
         }
     }
