@@ -6,34 +6,39 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import com.dicoding.bottomnavigationbar.BMIActivity
-import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.ui.DaftarAhliGizi
+import com.dicoding.bottomnavigationbar.ui.bmi.BMIActivity
+import com.dicoding.bottomnavigationbar.databinding.FragmentHomeBinding
+import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DaftarAhliGizi
 
 class HomeFragment : Fragment() {
 
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val view = binding.root
 
-        // Find the Button by ID
-        val bmiButton: Button = view.findViewById(R.id.bmiButton)
-        val ahligiziButton: Button = view.findViewById(R.id.ahligiziButton)
-        // Set click listener for the button
+        val bmiButton = binding.bmiButton
+        val ahligiziButton = binding.ahliGiziButton
+
         bmiButton.setOnClickListener {
-            // Call method to start BMI activity
             startBmiActivity()
         }
+
         ahligiziButton.setOnClickListener {
-            // Call method to start BMI activity
             startDaftarAhligizi()
         }
 
         return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
     private fun startBmiActivity() {
         val intent = Intent(activity, BMIActivity::class.java)

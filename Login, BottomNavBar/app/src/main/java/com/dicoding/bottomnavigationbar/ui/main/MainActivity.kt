@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var auth : FirebaseAuth
     private var binding : ActivityMainBinding? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

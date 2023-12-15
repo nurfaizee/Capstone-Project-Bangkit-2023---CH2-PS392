@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui
+package com.dicoding.bottomnavigationbar.ui.daftarAhliGizi
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
@@ -8,8 +8,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.ui.data.AhliGizi
-import com.dicoding.bottomnavigationbar.ui.data.ListAhliGiziAdapter
+import com.dicoding.bottomnavigationbar.data.AhliGizi
+import com.dicoding.bottomnavigationbar.data.ListAhliGiziAdapter
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 
 class DaftarAhliGizi : AppCompatActivity() {
@@ -45,7 +45,7 @@ class DaftarAhliGizi : AppCompatActivity() {
 
         listAhliGiziAdapter.setOnItemClickCallback(object : ListAhliGiziAdapter.OnItemClickCallback {
             override fun onItemClicked(data: AhliGizi) {
-                val intentToDetail = Intent(this@DaftarAhliGizi, MainActivity::class.java)
+                val intentToDetail = Intent(this@DaftarAhliGizi, DetailAhliGiziActivity::class.java)
                 intentToDetail.putExtra("DATA", data)
                 startActivity(intentToDetail)
             }

@@ -1,30 +1,30 @@
 package com.dicoding.bottomnavigationbar.ui.login
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Patterns
-import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.databinding.ActivitySignInBinding
-import com.dicoding.bottomnavigationbar.ui.main.MainActivity
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import android.app.Activity
 import android.util.Log
-import android.widget.Toast
+import android.util.Patterns
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
+import com.dicoding.bottomnavigationbar.R
+import com.dicoding.bottomnavigationbar.data.LoginManager
+import com.dicoding.bottomnavigationbar.databinding.ActivitySignInBinding
 import com.dicoding.bottomnavigationbar.ui.Retrofit.Retro
 import com.dicoding.bottomnavigationbar.ui.Retrofit.UserApi
 import com.dicoding.bottomnavigationbar.ui.Retrofit.UsersResponse
+import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +34,7 @@ class SignInActivity : BaseActivity() {
     private var binding : ActivitySignInBinding? = null
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private val loginManager by lazy { LoginManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +60,9 @@ class SignInActivity : BaseActivity() {
         }
 
         binding?.btnSignIn?.setOnClickListener {
-            signInUser()
+            lifecycleScope.launch {
+                signInUser()
+            }
         }
 
         binding?.btnSignInWithGoogle?.setOnClickListener{
@@ -68,14 +71,18 @@ class SignInActivity : BaseActivity() {
 
     }
 
+    // Assuming loginManager is an instance of LoginManager
+
     private fun signInUser() {
         val email = binding?.etSinInEmail?.text.toString()
         val password = binding?.etSinInPassword?.text.toString()
-        showProgressBar()
+
         if (validateForm(email, password)) {
             val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
+
             retro.login(email = email, password = password).enqueue(object : Callback<UsersResponse> {
                 override fun onResponse(call: Call<UsersResponse>, response: Response<UsersResponse>) {
+                    Log.i("SignInActivity", "onResponse: Start")
                     if (response.isSuccessful) {
                         val userResponse = response.body()
 
@@ -83,24 +90,20 @@ class SignInActivity : BaseActivity() {
                             val user = userResponse.user
 
                             if (user != null) {
-                                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                                Log.i("token", userResponse.accessToken!!)
-                                Log.i("email", user.email!!)
-                                hideProgressBar()
-                                // Process the data
-                            } else {
-                                // Handle null user in the response body
+                                lifecycleScope.launch {
+                                    loginManager.saveLoginData(user.email ?: "", userResponse.accessToken ?: "")
+
+                                    // Start MainActivity
+                                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                                    Log.i("token", userResponse.accessToken!!)
+                                    Log.i("email", user.email!!)
+                                }
                             }
-                        } else {
-                            // Handle null response body
                         }
-                    } else {
-                        // Handle unsuccessful response
                     }
                 }
 
                 override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
-                    // Handle failure
                     Log.e("Error", t.message!!)
                 }
             })
@@ -110,11 +113,7 @@ class SignInActivity : BaseActivity() {
     private fun signInWithGoogle()
     {
         val signInIntent = googleSignInClient.signInIntent
-        if(signInIntent != null){
-            launcher.launch(signInIntent)
-        } else {
-            showToast(this, "Google Sign In Failed.Please try again")
-        }
+        launcher.launch(signInIntent)
 
     }
 

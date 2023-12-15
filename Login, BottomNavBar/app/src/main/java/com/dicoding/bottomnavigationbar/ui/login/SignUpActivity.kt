@@ -74,7 +74,7 @@ class SignUpActivity : BaseActivity() {
                         }
                     } else {
                         showToast(this@SignUpActivity, "Email/Nama Data Sudah ada")
-                        hideProgressBar()                        // Handle unsuccessful response
+                        hideProgressBar()
                     }
                 }
 

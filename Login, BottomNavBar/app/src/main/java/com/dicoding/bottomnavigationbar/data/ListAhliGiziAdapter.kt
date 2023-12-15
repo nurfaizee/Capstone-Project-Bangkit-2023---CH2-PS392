@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.data
+package com.dicoding.bottomnavigationbar.data
 
 import android.view.LayoutInflater
 import android.view.View
@@ -32,11 +32,11 @@ class ListAhliGiziAdapter(private val listAhliGizi: ArrayList<AhliGizi>) : Recyc
     override fun getItemCount(): Int = listAhliGizi.size
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvName: TextView = itemView.findViewById(R.id.tv_name)
-        val tvRumahSakit: TextView = itemView.findViewById(R.id.tv_rumahsakit)
-        val tvNomor: TextView = itemView.findViewById(R.id.tv_nomor)
+        val tvName: TextView = itemView.findViewById(R.id.tv_nama_dokter)
+        val tvRumahSakit: TextView = itemView.findViewById(R.id.tv_rs)
+        val tvNomor: TextView = itemView.findViewById(R.id.tv_telp)
         val tvJadwal: TextView = itemView.findViewById(R.id.tv_jadwal)
-        val imgPhoto: ImageView = itemView.findViewById(R.id.iv_gambar)
+        val imgPhoto: ImageView = itemView.findViewById(R.id.iv_dokter)
     }
     interface OnItemClickCallback {
         fun onItemClicked(data: AhliGizi)

@@ -66,4 +66,6 @@ dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }

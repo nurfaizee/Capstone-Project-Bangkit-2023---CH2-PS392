@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.daftarAhliGizi.DetailAhliGiziActivity"
+    android:orientation="vertical">
+
+<!--    val dataName = resources.getStringArray(R.array.data_name)-->
+<!--    val dataRumahSakit = resources.getStringArray(R.array.data_rumahsakit)-->
+<!--    val dataNomor = resources.getStringArray(R.array.data_nomor)-->
+<!--    val dataJadwal = resources.getStringArray(R.array.data_jadwal)-->
+<!--    val dataGambar = resources.getStringArray(R.array.data_gambar)-->
+
+    <TextView
+        android:id="@+id/tv_nama_dokter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEXT1"/>
+
+    <TextView
+        android:id="@+id/tv_rs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEXT1"/>
+    <TextView
+        android:id="@+id/tv_telp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEXT1"/>
+    <TextView
+        android:id="@+id/tv_jadwal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEXT1"/>
+    <ImageView
+        android:id="@+id/iv_dokter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEXT1"/>
+</LinearLayout>

@@ -1,6 +1,9 @@
-package com.dicoding.bottomnavigationbar.ui.data
+package com.dicoding.bottomnavigationbar.data
 
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class AhliGizi(
     val nama: String,
     val RumahSakit: String,

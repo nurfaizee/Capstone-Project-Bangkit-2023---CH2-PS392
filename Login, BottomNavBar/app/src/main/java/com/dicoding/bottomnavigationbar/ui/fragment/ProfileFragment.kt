@@ -3,73 +3,66 @@ package com.dicoding.bottomnavigationbar.ui.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.dicoding.bottomnavigationbar.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import com.dicoding.bottomnavigationbar.data.LoginManager
 import com.dicoding.bottomnavigationbar.databinding.FragmentProfileBinding
-import com.dicoding.bottomnavigationbar.ui.login.GetStartedActivity
 import com.dicoding.bottomnavigationbar.ui.login.SignInActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
     private var binding : FragmentProfileBinding? =null
     private lateinit var auth : FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?){
-        super.onCreate(savedInstanceState)
-        binding = FragmentProfileBinding.inflate(layoutInflater)
-    }
+    private val loginManager: LoginManager by lazy { LoginManager(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_profile, container, false)
         binding = FragmentProfileBinding.inflate(inflater,container, false)
         auth = Firebase.auth
 
         binding?.btnSignOut?.setOnClickListener{
-            if(auth.currentUser != null)
-            {
-                try {
-                    auth.signOut()
-                    val intent = Intent(requireContext(), SignInActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    // Handle the exception, e.g., log it or show a message to the user
-                    Log.e("ProfileFragment", "Error signing out: ${e.message}")
+            lifecycleScope.launch {
+            when {
+                auth.currentUser != null -> {
+                    try {
+                        auth.signOut()
+                        navigateToSignInActivity()
+                    } catch (e: Exception) {
+                        Log.e("ProfileFragment", "Error signing out: ${e.message}")
+                    }
                 }
-//                auth.signOut()
-//                startActivity(Intent(requireContext(), SignInActivity::class.java))
+                loginManager.isUserLoggedIn.first() -> {
+                        loginManager.clearLoginData()
+                        navigateToSignInActivity()
+
+                }
+                else -> {
+                    // Handle the case when neither Firebase Auth nor LoginManager has a logged-in user
+                    Log.d("ProfileFragment", "No user is logged in.")
+                }
             }
-        }
-//        binding?.btnDashboard?.setOnClickListener {
-//            finish()
-//        }
-//        binding?.btnMap?.setOnClickListener {
-//            startActivity(Intent(this,MapActivity::class.java))
-//            finish()
-//        }
-//
-//        binding?.cvManageProfile?.setOnClickListener {
-//            startActivity(Intent(this,ManageProfileActivity::class.java))
-//        }
-//        binding?.ivBackBtn?.setOnClickListener {
-//            finish()
-//        }
+        }}
         return binding?.root
+    }
+
+    private fun navigateToSignInActivity() {
+        val intent = Intent(requireContext(), SignInActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
     }
-
 }
