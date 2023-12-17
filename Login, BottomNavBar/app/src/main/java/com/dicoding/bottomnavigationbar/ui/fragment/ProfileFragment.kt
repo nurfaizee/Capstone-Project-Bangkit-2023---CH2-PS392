@@ -44,7 +44,7 @@ class ProfileFragment : Fragment() {
 
         val currentUser = auth.currentUser
         currentUser?.let {
-            binding?.tvUsername?.text = currentUser.displayName ?: "No display name available"
+            binding?.tvUsername?.text = currentUser.displayName ?: "No username available"
             binding?.tvEmail?.text = currentUser.email ?: "No email available"
         }
 
