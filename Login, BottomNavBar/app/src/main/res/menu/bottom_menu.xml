@@ -13,8 +13,8 @@
 
     <item
         android:id="@+id/bottom_favorite"
-        android:title="Favorite"
-        android:icon="@drawable/baseline_favorite_24"/>
+        android:title="Riwayat"
+        android:icon="@drawable/baseline_article_24"/>
 
     <item
         android:id="@+id/bottom_profile"

@@ -10,70 +10,106 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="4dp"
         android:padding="4dp">
 
         <ImageView
-            android:id="@+id/iv_gambar"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:id="@+id/iv_dokter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:paddingRight="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_nama_dokter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_gambar"
+            app:layout_constraintStart_toEndOf="@+id/iv_dokter"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="dr.Hariono" />
+            tools:text="Dr.Sarah Jhonson" />
 
         <TextView
-            android:id="@+id/tv_rumahsakit"
+            android:id="@+id/tv_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_gambar"
-            app:layout_constraintTop_toBottomOf="@id/tv_name"
-            tools:text="Jember Klinik" />
+            android:text="Rumah Sakit: "
+            app:layout_constraintStart_toEndOf="@+id/iv_dokter"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama_dokter" />
 
         <TextView
-            android:id="@+id/tv_nomor"
+            android:id="@+id/tv_rs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_gambar"
-            app:layout_constraintTop_toBottomOf="@id/tv_rumahsakit"
-            tools:text="08819891602" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_1"
+            app:layout_constraintStart_toEndOf="@+id/tv_1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama_dokter"
+            tools:text="RS Sehat Bahagia" />
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Nomor Telepon: "
+            app:layout_constraintStart_toEndOf="@+id/iv_dokter"
+            app:layout_constraintTop_toBottomOf="@+id/tv_1" />
+
+        <TextView
+            android:id="@+id/tv_telp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_2"
+            app:layout_constraintStart_toEndOf="@+id/tv_2"
+            app:layout_constraintTop_toBottomOf="@+id/tv_1"
+            tools:text="(123) 456-7890" />
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:text="Jadwal: "
+            app:layout_constraintStart_toEndOf="@+id/iv_dokter"
+            app:layout_constraintTop_toBottomOf="@+id/tv_2" />
 
         <TextView
             android:id="@+id/tv_jadwal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/blue"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/iv_gambar"
-            app:layout_constraintTop_toBottomOf="@id/tv_nomor"
-            tools:text="Senin-Rabu,08:00-16:00" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_3"
+            app:layout_constraintStart_toEndOf="@+id/tv_3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_2"
+            tools:text="Selasa-Sabtu, 09:00-17:00" />
 
         <Button
             android:id="@+id/button_read"
             android:layout_width="94dp"
             android:layout_height="32dp"
-            android:text="Read More"
-            android:textSize="9dp"
+            android:backgroundTint="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Hubungi"
+            android:textSize="9dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

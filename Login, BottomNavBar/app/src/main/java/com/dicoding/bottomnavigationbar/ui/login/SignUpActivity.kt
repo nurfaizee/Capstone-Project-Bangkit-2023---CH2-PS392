@@ -39,7 +39,6 @@ class SignUpActivity : BaseActivity() {
     }
 
     private fun registerUser(){
-        showProgressBar()
         val name = binding?.etSinUpName?.text.toString()
         val email = binding?.etSinUpEmail?.text.toString()
         val password = binding?.etSinUpPassword?.text.toString()
@@ -50,6 +49,7 @@ class SignUpActivity : BaseActivity() {
                 Callback<UsersResponse> {
                 override fun onResponse(call: Call<UsersResponse>, response: Response<UsersResponse>) {
                     if (response.isSuccessful) {
+                        showProgressBar()
                         val userResponse = response.body()
 
                         if (userResponse != null) {
@@ -74,7 +74,7 @@ class SignUpActivity : BaseActivity() {
                         }
                     } else {
                         showToast(this@SignUpActivity, "Email/Nama Data Sudah ada")
-                        hideProgressBar()                        // Handle unsuccessful response
+                        hideProgressBar()
                     }
                 }
 
@@ -83,20 +83,6 @@ class SignUpActivity : BaseActivity() {
                     Log.e("Error", t.message!!)
                 }
             })
-//            auth.createUserWithEmailAndPassword(email,password)
-//                .addOnCompleteListener { task ->
-//                    if (task.isSuccessful)
-//                    {
-//                        showToast(this, "User Id Created Successfully")
-//                        hideProgressBar()
-//                        startActivity(Intent(this, MainActivity::class.java))
-//                        finish()
-//                    }
-//                    else {
-//                        showToast(this, "User Id Not Created. Try Again Later")
-//                        hideProgressBar()
-//                    }
-//                }
         }
     }
 
@@ -104,15 +90,15 @@ class SignUpActivity : BaseActivity() {
     {
         return when {
             TextUtils.isEmpty(name)->{
-                binding?.tilName?.error = "Enter name"
+                binding?.etSinUpName?.error = "Enter name"
                 false
             }
             TextUtils.isEmpty(email) && !Patterns.EMAIL_ADDRESS.matcher(email).matches()->{
-                binding?.tilEmail?.error = "Enter valid email address"
+                binding?.etSinUpEmail?.error = "Enter valid email address"
                 false
             }
             TextUtils.isEmpty(password)->{
-                binding?.tilPassword?.error = "Enter password"
+                binding?.etSinUpPassword?.error = "Enter password"
                 false
             }
             else -> { true }

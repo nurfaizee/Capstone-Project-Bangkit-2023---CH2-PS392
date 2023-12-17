@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchBar"
+            android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -25,40 +25,16 @@
             app:closeIcon="@drawable/baseline_clear_24"
             app:searchIcon="@drawable/baseline_search_24"
             android:background="@drawable/search_bkg"/>
-<!--        <com.google.android.material.search.SearchBar-->
-<!--            android:id="@+id/searchBar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:hint="Cari Artikel"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-
-<!--        <com.google.android.material.search.SearchView-->
-<!--            android:id="@+id/searchView"-->
-<!--            android:backgroundTint="@color/blue"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:hint="Cari Artikel"-->
-<!--            >-->
-<!--        </com.google.android.material.search.SearchView>-->
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_users"
+            android:id="@+id/rv_artikel"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            tools:listitem="@layout/item_artikel"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

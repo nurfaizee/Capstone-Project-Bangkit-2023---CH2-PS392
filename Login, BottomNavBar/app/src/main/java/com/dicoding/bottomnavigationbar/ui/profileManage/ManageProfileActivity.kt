@@ -7,8 +7,11 @@ import android.provider.SyncStateContract
 import android.util.Log
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.databinding.ActivityManageProfileBinding
+import com.dicoding.bottomnavigationbar.ui.Retrofit.UsersResponse
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import retrofit2.Call
+import retrofit2.Response
 
 class ManageProfileActivity : AppCompatActivity() {
     private var binding: ActivityManageProfileBinding? = null
@@ -24,6 +27,7 @@ class ManageProfileActivity : AppCompatActivity() {
     }
     private fun setProfilePic()
     {
+
         val mFireStore = FirebaseFirestore.getInstance()
 //        mFireStore.collection(SyncStateContract.Constants.USERS).document(FireStoreClass().getCurrentUserId()).get().addOnSuccessListener { document->
 //            val image = document.get("image").toString()
@@ -38,4 +42,6 @@ class ManageProfileActivity : AppCompatActivity() {
 //            }
 //        }
     }
+
+
 }

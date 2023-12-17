@@ -1,29 +1,327 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context=".ui.fragment.HomeFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="16dp">
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/tv_22"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_marginStart="8dp"
+            android:id="@+id/tv_22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello,"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_carousel"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_weight="1"
+            android:contentDescription="Carousel"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_iklan_capstone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_1" />
+
+        <GridLayout
+            android:id="@+id/gl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="3"
+            android:rowCount="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_carousel">
+
+            <!--1-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_1"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:contentDescription="card2"
+                        android:src="@drawable/ic_deteksistunting" />
 
 
-    <Button
-        android:id="@+id/bmiButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calculate BMI"
-        android:layout_marginTop="16dp"
-        android:onClick="startBmiActivity" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Analisis Resiko Stunting"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
-    <Button
-        android:id="@+id/ahligiziButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ahli Gizi"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="8dp"
-        android:onClick="startAhliGiziActivity" />
+            </androidx.cardview.widget.CardView>
+
+            <!--2-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_2"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:contentDescription="card1"
+                        android:src="@drawable/ic_deteksigizi" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Deteksi Gizi Makanan"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--3-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/ahliGiziButton"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:contentDescription="card3"
+                        android:src="@drawable/ic_ahligizi" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Cari Ahli Gizi"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--4-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/bmiButton"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="fill"
+
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:contentDescription="card4"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_bmi" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Hitung BMI"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--5-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_5"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="fill"
+
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:contentDescription="card5"
+                        android:scaleType="centerCrop"
+
+                        android:src="@drawable/ic_rumahsakit" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Cari Rumah Sakit"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!--6-->
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/aboutbutton"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="fill"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:contentDescription="card6"
+                        android:src="@drawable/ic_abaoutus" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Tentang Apps"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+        <TextView
+
+            android:layout_marginStart="8dp"
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seputar Gizi"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl" />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:id="@+id/rv_artikel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_2"
+            tools:listitem="@layout/item_artikel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

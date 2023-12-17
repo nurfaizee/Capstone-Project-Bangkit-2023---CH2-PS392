@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="data_name">
+
+        <item>Dr. Johan</item>
+        <item>Dr. Michel</item>
+        <item>Dr. Laura</item>
+        <item>Dr. Sarah</item>
+        <item>Dr. Robert</item>
+    </string-array>
+
+    <string-array name="data_rumahsakit">
+        <item>Rs. Sehat Bahagia</item>
+        <item>Rs. Sentosa</item>
+        <item>Rs. Pusat Medika</item>
+        <item>Rs. Bunda</item>
+        <item>Rs. Harapan Kita</item>
+    </string-array>
+
+    <string-array name="data_nomor">
+        <item>0895389528226</item>
+        <item>08819891602</item>
+        <item>08123456789</item>
+        <item>08567890123</item>
+        <item>08765432100</item>
+    </string-array>
+
+    <string-array name="data_jadwal">
+        <item>Senin-Jumat, 08:00-15:00</item>
+        <item>Senin-Kamis, 08:00-15:00</item>
+        <item>Senin-Sabtu, 09:00-16:00</item>
+        <item>Senin-Jumat, 10:00-17:00</item>
+        <item>Senin-Jumat, 08:30-16:30</item>
+
+    </string-array>
+    <string-array name="data_gambar">
+        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
+        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
+
+        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
+        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
+        <item>https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg</item>
+
+    </string-array>
+
+</resources>
