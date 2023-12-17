@@ -39,7 +39,15 @@ class ProfileFragment : Fragment() {
             loginManager.emailFlow.collect { email ->
                 binding?.tvEmail?.text = email ?: "No email available"
             }
+
         }
+
+        val currentUser = auth.currentUser
+        currentUser?.let {
+            binding?.tvUsername?.text = currentUser.displayName ?: "No display name available"
+            binding?.tvEmail?.text = currentUser.email ?: "No email available"
+        }
+
         binding?.btnSignOut?.setOnClickListener{
             lifecycleScope.launch {
                 when {
