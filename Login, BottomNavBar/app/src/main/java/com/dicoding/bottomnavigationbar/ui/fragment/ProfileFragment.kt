@@ -29,7 +29,6 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater,container, false)
         auth = Firebase.auth
         lifecycleScope.launch {
-            // Observe username changes
             loginManager.usernameFlow.collect { username ->
                 binding?.tvUsername?.text = username ?: "No username available"
             }
@@ -43,6 +42,9 @@ class ProfileFragment : Fragment() {
         }
 
         val currentUser = auth.currentUser
+        if (currentUser == null) {
+            navigateToSignInActivity()
+        }
         currentUser?.let {
             binding?.tvUsername?.text = currentUser.displayName ?: "No username available"
             binding?.tvEmail?.text = currentUser.email ?: "No email available"
@@ -72,7 +74,6 @@ class ProfileFragment : Fragment() {
             }}
         return binding?.root
     }
-
 
     private fun navigateToSignInActivity() {
         val intent = Intent(requireContext(), SignInActivity::class.java)
