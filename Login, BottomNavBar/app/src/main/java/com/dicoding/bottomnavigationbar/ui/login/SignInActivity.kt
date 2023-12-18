@@ -164,14 +164,10 @@ class SignInActivity : BaseActivity() {
 
                                 lifecycleScope.launch {
                                     loginManager.saveLoginData(user.email ?: "", userResponse.accessToken ?: "",user.username?:"")
-
-                                    // Start MainActivity
-                                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                                    Log.i("username", user.username!!)
-//                                    Log.i("token", userResponse.accessToken!!)
-
-                                    Log.i("email", user.email!!)
                                 }
+                                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                                Log.i("username", user.username!!)
+                                Log.i("email", user.email!!)
                             }
                         }
                     }

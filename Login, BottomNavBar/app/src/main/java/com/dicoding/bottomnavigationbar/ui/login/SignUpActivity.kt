@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
+import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.R
+import com.dicoding.bottomnavigationbar.data.LoginManager
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignUpBinding
 import com.dicoding.bottomnavigationbar.ui.Retrofit.Retro
 import com.dicoding.bottomnavigationbar.ui.Retrofit.UserApi
@@ -15,6 +17,7 @@ import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +26,7 @@ class SignUpActivity : BaseActivity() {
 
     private var binding : ActivitySignUpBinding? = null
     private lateinit var auth : FirebaseAuth
+    private val loginManager by lazy { LoginManager(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +60,9 @@ class SignUpActivity : BaseActivity() {
                             val user = userResponse.user
 
                             if (user != null) {
+                                lifecycleScope.launch {
+                                    loginManager.saveLoginData(user.email ?: "", userResponse.accessToken ?: "", user.username ?: "")
+                                }
                                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                                 val token = userResponse.accessToken
                                 showToast(this@SignUpActivity, "$token")

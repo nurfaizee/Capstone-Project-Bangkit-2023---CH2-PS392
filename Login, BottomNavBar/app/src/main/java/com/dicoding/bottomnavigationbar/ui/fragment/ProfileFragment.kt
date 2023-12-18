@@ -42,9 +42,7 @@ class ProfileFragment : Fragment() {
         }
 
         val currentUser = auth.currentUser
-        if (currentUser == null) {
-            navigateToSignInActivity()
-        }
+
         currentUser?.let {
             binding?.tvUsername?.text = currentUser.displayName ?: "No username available"
             binding?.tvEmail?.text = currentUser.email ?: "No email available"
