@@ -8,12 +8,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.data.AhliGizi
-import com.dicoding.bottomnavigationbar.data.AhliGiziAdapter
+import com.dicoding.bottomnavigationbar.data.ahliGizi.AhliGizi
+import com.dicoding.bottomnavigationbar.data.ahliGizi.AhliGiziAdapter
+import com.dicoding.bottomnavigationbar.data.ahliGizi.DataAhliGizi
 
 class DaftarAhliGizi : AppCompatActivity() {
     private lateinit var rvAhligizi: RecyclerView
-    private val list = ArrayList<AhliGizi>()
+    private val list = DataAhliGizi.ahliGizi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_daftar_ahli_gizi)
@@ -21,21 +22,7 @@ class DaftarAhliGizi : AppCompatActivity() {
 
         rvAhligizi = findViewById(R.id.rv_ahligizi)
         rvAhligizi.setHasFixedSize(true)
-        list.addAll(getList())
         showRecyclerList()
-    }
-    private fun getList(): ArrayList<AhliGizi> {
-        val dataName = resources.getStringArray(R.array.data_name)
-        val dataRumahSakit = resources.getStringArray(R.array.data_rumahsakit)
-        val dataNomor = resources.getStringArray(R.array.data_nomor)
-        val dataJadwal = resources.getStringArray(R.array.data_jadwal)
-        val dataGambar = resources.getStringArray(R.array.data_gambar)
-        val listAhligizi = ArrayList<AhliGizi>()
-        for (i in dataName.indices) {
-            val ahligizi = AhliGizi(dataName[i], dataRumahSakit[i],dataNomor[i], dataJadwal[i],dataGambar[i])
-            listAhligizi.add(ahligizi)
-        }
-        return listAhligizi
     }
 
     private fun showRecyclerList() {

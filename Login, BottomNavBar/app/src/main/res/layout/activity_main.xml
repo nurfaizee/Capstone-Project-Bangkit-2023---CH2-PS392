@@ -22,7 +22,7 @@
         android:background="@color/blue"
         app:itemIconTint="@color/bottom_nav_icon_color"
         app:itemTextColor="@color/bottom_nav_icon_color"
-        app:itemIconSize="35dp"
+        app:itemIconSize="31dp"
         app:itemActiveIndicatorStyle="@style/App.Custom.Indicator"
         app:labelVisibilityMode="labeled"/>
 

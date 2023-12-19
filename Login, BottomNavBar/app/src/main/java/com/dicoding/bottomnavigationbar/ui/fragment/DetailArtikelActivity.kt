@@ -2,9 +2,9 @@ package com.dicoding.bottomnavigationbar.ui.fragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.data.Artikel
+import com.dicoding.bottomnavigationbar.data.artikel.Artikel
 import com.dicoding.bottomnavigationbar.databinding.ActivityDetailArtikelBinding
 
 class DetailArtikelActivity : AppCompatActivity() {
@@ -22,6 +22,9 @@ class DetailArtikelActivity : AppCompatActivity() {
             binding.tvJudulArtikel.text = artikel.judulArtikel
             binding.tvDeskripsiArtikel.text = artikel.descArtikel
             Glide.with(this).load(artikel.imgArtikel).into(binding.ivArtikel)
+        } else {
+            Toast.makeText(this, "Data tidak valid", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 }

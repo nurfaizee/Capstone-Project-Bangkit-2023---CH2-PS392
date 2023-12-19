@@ -1,17 +1,9 @@
 package com.dicoding.bottomnavigationbar.ui.profileManage
 
-import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.SyncStateContract
-import android.util.Log
-import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.databinding.ActivityManageProfileBinding
-import com.dicoding.bottomnavigationbar.ui.Retrofit.UsersResponse
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import retrofit2.Call
-import retrofit2.Response
 
 class ManageProfileActivity : AppCompatActivity() {
     private var binding: ActivityManageProfileBinding? = null

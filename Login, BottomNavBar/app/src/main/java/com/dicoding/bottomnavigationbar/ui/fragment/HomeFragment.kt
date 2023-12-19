@@ -7,28 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-import android.widget.TextView
-import androidx.constraintlayout.helper.widget.Carousel
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.data.Artikel
-import com.dicoding.bottomnavigationbar.data.ArtikelAdapter
+import com.dicoding.bottomnavigationbar.data.artikel.Artikel
+import com.dicoding.bottomnavigationbar.data.artikel.ArtikelAdapter
 import com.dicoding.bottomnavigationbar.data.LoginManager
+import com.dicoding.bottomnavigationbar.data.artikel.DataArtikel
 import com.dicoding.bottomnavigationbar.ui.bmi.BMIActivity
 import com.dicoding.bottomnavigationbar.databinding.FragmentHomeBinding
 import com.dicoding.bottomnavigationbar.ui.about.AboutActivity
 import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DaftarAhliGizi
+import com.dicoding.bottomnavigationbar.ui.daftarRS.DaftarRS
 import com.dicoding.bottomnavigationbar.ui.stunting.StuntingActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-
-
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val list = ArrayList<Artikel>()
+    private lateinit var auth : FirebaseAuth
+    private val list = DataArtikel.artikel
     private val imageArray:ArrayList<Int> = ArrayList()
 //    private val carouselview:CarouselView?=null
     private val loginManager: LoginManager by lazy { LoginManager(requireContext()) }
@@ -38,12 +40,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        auth = Firebase.auth
         val view = binding.root
 
-        val bmiButton = binding.bmiButton
-        val ahligiziButton = binding.ahliGiziButton
-        val aboutbutton = binding.aboutbutton
         val stuntingbutton = binding.stuntingButton
+        val ahligiziButton = binding.ahliGiziButton
+        val bmiButton = binding.bmiButton
+        val cariAhliGizi = binding.cariAhliGizi
+        val aboutbutton = binding.aboutbutton
+
 
 //        carouselView = binding.ivCarousel
         imageArray.add(R.drawable.img_iklan_capstone)
@@ -53,9 +58,10 @@ class HomeFragment : Fragment() {
                 binding?.tv1?.text = username ?: "No username available"
             }
         }
+        val currentUser = auth.currentUser
 
-        bmiButton.setOnClickListener {
-            startBmiActivity()
+        currentUser?.let {
+            binding?.tv1?.text = currentUser.displayName ?: "No username available"
         }
         stuntingbutton.setOnClickListener {
             startStuntingActivity()
@@ -63,10 +69,15 @@ class HomeFragment : Fragment() {
         ahligiziButton.setOnClickListener {
             startDaftarAhligizi()
         }
+        bmiButton.setOnClickListener {
+            startBmiActivity()
+        }
+        cariAhliGizi.setOnClickListener {
+            startRsActivity()
+        }
         aboutbutton.setOnClickListener {
             startAbout()
         }
-        list.addAll(getList())
         showRecyclerList()
         return view
     }
@@ -85,17 +96,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-    private fun getList(): ArrayList<Artikel> {
-        val dataJudul = resources.getStringArray(R.array.judul_artikel)
-        val dataDescArtikel = resources.getStringArray(R.array.data_desc_artikel)
-        val dataGambarArtikel = resources.getStringArray(R.array.data_gambar_artikel)
-        val listArtikel = ArrayList<Artikel>()
-        for (i in dataJudul.indices) {
-            val artikel = Artikel(dataJudul[i], dataDescArtikel[i], dataGambarArtikel[i])
-            listArtikel.add(artikel)
-        }
-        return listArtikel
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -105,12 +105,16 @@ class HomeFragment : Fragment() {
         val intent = Intent(activity, StuntingActivity::class.java)
         startActivity(intent)
     }
+    private fun startDaftarAhligizi() {
+        val intent = Intent(activity, DaftarAhliGizi::class.java)
+        startActivity(intent)
+    }
     private fun startBmiActivity() {
         val intent = Intent(activity, BMIActivity::class.java)
         startActivity(intent)
     }
-    private fun startDaftarAhligizi() {
-        val intent = Intent(activity, DaftarAhliGizi::class.java)
+    private fun startRsActivity() {
+        val intent = Intent(activity,DaftarRS::class.java)
         startActivity(intent)
     }
     private fun startAbout() {

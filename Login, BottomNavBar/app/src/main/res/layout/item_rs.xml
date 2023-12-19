@@ -55,28 +55,28 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_nama_rs"
             tools:text="Jl. Puspa Indah No.123, Jakarta" />
 
-        <TextView
-            android:id="@+id/tv_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:text="Jarak Dari Pusat Kota: "
-            app:layout_constraintStart_toEndOf="@+id/iv_rs"
-            app:layout_constraintTop_toBottomOf="@+id/tv_1" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:text="Jarak Dari Pusat Kota: "-->
+<!--            app:layout_constraintStart_toEndOf="@+id/iv_rs"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_1" />-->
 
-        <TextView
-            android:id="@+id/tv_jarak_rs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/blue"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_2"
-            app:layout_constraintStart_toEndOf="@+id/tv_2"
-            app:layout_constraintTop_toBottomOf="@+id/tv_1"
-            tools:text="5 Km" />
+<!--        <TextView-->
+<!--            android:id="@+id/tv_jarak_rs"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tv_2"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/tv_2"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tv_1"-->
+<!--            tools:text="5 Km" />-->
 
         <Button
             android:id="@+id/button_read"

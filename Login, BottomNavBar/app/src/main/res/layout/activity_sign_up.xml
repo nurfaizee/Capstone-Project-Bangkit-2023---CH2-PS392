@@ -40,7 +40,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_hello" />
 
-        <com.dicoding.bottomnavigationbar.ui.customview.ETName
+        <com.dicoding.bottomnavigationbar.ui.viewCustom.ETName
             android:id="@+id/et_sin_up_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_sin_up_name" />
 
-        <com.dicoding.bottomnavigationbar.ui.customview.ETEmail
+        <com.dicoding.bottomnavigationbar.ui.viewCustom.ETEmail
             android:id="@+id/et_sin_up_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_sin_up_email" />
 
-        <com.dicoding.bottomnavigationbar.ui.customview.ETPassword
+        <com.dicoding.bottomnavigationbar.ui.viewCustom.ETPassword
             android:id="@+id/et_sin_up_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

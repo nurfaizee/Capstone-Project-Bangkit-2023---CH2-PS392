@@ -58,7 +58,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_sd2" />
 
-        <com.dicoding.bottomnavigationbar.ui.customview.ETEmail
+        <com.dicoding.bottomnavigationbar.ui.viewCustom.ETEmail
             android:id="@+id/et_sin_in_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_sin_in_email" />
 
-        <com.dicoding.bottomnavigationbar.ui.customview.ETPassword
+        <com.dicoding.bottomnavigationbar.ui.viewCustom.ETPassword
             android:id="@+id/et_sin_in_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -1,18 +1,16 @@
 package com.dicoding.bottomnavigationbar.ui.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.lifecycleScope
-import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.LoginManager
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignUpBinding
-import com.dicoding.bottomnavigationbar.ui.Retrofit.Retro
-import com.dicoding.bottomnavigationbar.ui.Retrofit.UserApi
-import com.dicoding.bottomnavigationbar.ui.Retrofit.UsersResponse
+import com.dicoding.bottomnavigationbar.data.retrofit.Retro
+import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
+import com.dicoding.bottomnavigationbar.data.retrofit.UsersResponse
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

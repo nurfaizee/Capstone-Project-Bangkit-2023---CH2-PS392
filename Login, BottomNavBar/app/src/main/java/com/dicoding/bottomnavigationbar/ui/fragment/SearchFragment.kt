@@ -8,19 +8,15 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.dicoding.bottomnavigationbar.R
-import com.dicoding.bottomnavigationbar.data.AhliGizi
-import com.dicoding.bottomnavigationbar.data.AhliGiziAdapter
-import com.dicoding.bottomnavigationbar.data.Artikel
-import com.dicoding.bottomnavigationbar.data.ArtikelAdapter
+import com.dicoding.bottomnavigationbar.data.artikel.Artikel
+import com.dicoding.bottomnavigationbar.data.artikel.ArtikelAdapter
+import com.dicoding.bottomnavigationbar.data.artikel.DataArtikel
 import com.dicoding.bottomnavigationbar.databinding.FragmentSearchBinding
-import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DetailAhliGiziActivity
 
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
-    private val list = ArrayList<Artikel>()
+    private val list = DataArtikel.artikel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +26,6 @@ class SearchFragment : Fragment() {
         val view = binding.root
 
         binding.rvArtikel.setHasFixedSize(true)
-        list.addAll(getList())
         showRecyclerList()
 
         val searchView = binding.searchView
@@ -48,19 +43,6 @@ class SearchFragment : Fragment() {
         })
         return view
     }
-
-    private fun getList(): ArrayList<Artikel> {
-        val dataJudul = resources.getStringArray(R.array.judul_artikel)
-        val dataDescArtikel = resources.getStringArray(R.array.data_desc_artikel)
-        val dataGambarArtikel = resources.getStringArray(R.array.data_gambar_artikel)
-        val listArtikel = ArrayList<Artikel>()
-        for (i in dataJudul.indices) {
-            val artikel = Artikel(dataJudul[i], dataDescArtikel[i], dataGambarArtikel[i])
-            listArtikel.add(artikel)
-        }
-        return listArtikel
-    }
-
     private fun showRecyclerList() {
         binding.rvArtikel.layoutManager = LinearLayoutManager(context)
         val artikelAdapter = ArtikelAdapter(list)

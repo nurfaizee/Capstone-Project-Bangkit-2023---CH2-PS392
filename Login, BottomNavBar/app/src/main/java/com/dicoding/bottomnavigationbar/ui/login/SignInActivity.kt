@@ -13,9 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.LoginManager
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignInBinding
-import com.dicoding.bottomnavigationbar.ui.Retrofit.Retro
-import com.dicoding.bottomnavigationbar.ui.Retrofit.UserApi
-import com.dicoding.bottomnavigationbar.ui.Retrofit.UsersResponse
+import com.dicoding.bottomnavigationbar.data.retrofit.Retro
+import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
+import com.dicoding.bottomnavigationbar.data.retrofit.UsersResponse
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
