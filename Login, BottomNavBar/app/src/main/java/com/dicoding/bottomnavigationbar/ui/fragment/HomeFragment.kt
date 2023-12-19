@@ -19,9 +19,7 @@ import com.dicoding.bottomnavigationbar.ui.bmi.BMIActivity
 import com.dicoding.bottomnavigationbar.databinding.FragmentHomeBinding
 import com.dicoding.bottomnavigationbar.ui.about.AboutActivity
 import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DaftarAhliGizi
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.dicoding.bottomnavigationbar.ui.stunting.StuntingActivity
 import kotlinx.coroutines.launch
 
 
@@ -32,7 +30,6 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val list = ArrayList<Artikel>()
     private val imageArray:ArrayList<Int> = ArrayList()
-    private lateinit var auth : FirebaseAuth
 //    private val carouselview:CarouselView?=null
     private val loginManager: LoginManager by lazy { LoginManager(requireContext()) }
 
@@ -42,11 +39,11 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
-        auth = Firebase.auth
 
         val bmiButton = binding.bmiButton
         val ahligiziButton = binding.ahliGiziButton
         val aboutbutton = binding.aboutbutton
+        val stuntingbutton = binding.stuntingButton
 
 //        carouselView = binding.ivCarousel
         imageArray.add(R.drawable.img_iklan_capstone)
@@ -57,16 +54,12 @@ class HomeFragment : Fragment() {
             }
         }
 
-        val currentUser = auth.currentUser
-        currentUser?.let {
-            binding?.tv1?.text = currentUser.displayName ?: "No username available"
-        }
-
-
         bmiButton.setOnClickListener {
             startBmiActivity()
         }
-
+        stuntingbutton.setOnClickListener {
+            startStuntingActivity()
+        }
         ahligiziButton.setOnClickListener {
             startDaftarAhligizi()
         }
@@ -107,6 +100,10 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    private fun startStuntingActivity() {
+        val intent = Intent(activity, StuntingActivity::class.java)
+        startActivity(intent)
     }
     private fun startBmiActivity() {
         val intent = Intent(activity, BMIActivity::class.java)

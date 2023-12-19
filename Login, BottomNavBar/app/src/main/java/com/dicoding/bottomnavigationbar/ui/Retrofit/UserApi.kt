@@ -1,6 +1,7 @@
 package com.dicoding.bottomnavigationbar.ui.Retrofit
 
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -19,5 +20,7 @@ interface UserApi {
         @Field("email") email: String?,
         @Field("password") password: String?,
     ): Call<UsersResponse>
+    @POST("predict")
+    fun deteksiStunting(@Body request: StuntingRequest): Call<StuntingResponse>
 
 }

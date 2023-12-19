@@ -2,6 +2,7 @@ package com.dicoding.bottomnavigationbar.ui.bmi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -58,7 +59,9 @@ class BMIActivity : AppCompatActivity() {
     private fun calculateBmi() {
         val weight = binding.etNumberBerat.text.toString().toFloatOrNull() ?: 0f
         val height = binding.etNumberTinggi.text.toString().toFloatOrNull() ?: 0f
-
+        Log.d("SendData", "  detectBMI")
+        Log.d("SendData", "  Tinggi Badan: $height")
+        Log.d("SendData", "  Berat Badan: $weight")
         val bmi = calculateBmiValue(weight, height)
         val bmiCategory = getBmiCategory(bmi)
 
@@ -88,7 +91,6 @@ class BMIActivity : AppCompatActivity() {
             "Excess weight" -> "saran if excess weight:Kurangi asupan lemak sikecil dan perbanyak asupan serat hijau"
             "Obesity" -> "saran if obesity: kurangi asupan lemak si kecil dan jalani atur diet secara berkala"
             "Extremely Obese" -> "saran if extremely: kurangi dan kontrol asupan lemak dan karbohidrat sikecil dan silahkan kunjungi rumah sakit terdekat"
-
             else -> ""
         }
     }

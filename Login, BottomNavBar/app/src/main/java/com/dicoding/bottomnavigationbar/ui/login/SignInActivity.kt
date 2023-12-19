@@ -8,7 +8,6 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
-import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.R
@@ -22,10 +21,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -55,10 +52,6 @@ class SignInActivity : BaseActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding?.btnSignInWithGoogle?.setOnClickListener{
-            signInWithGoogle()
-        }
-
         binding?.tvRegister?.setOnClickListener{
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
@@ -74,6 +67,10 @@ class SignInActivity : BaseActivity() {
             }
         }
 
+        binding?.btnSignInWithGoogle?.setOnClickListener{
+            signInWithGoogle()
+        }
+
         binding?.seePassword?.setOnCheckedChangeListener { _, isChecked ->
             binding?.etSinInPassword?.transformationMethod = if (isChecked) {
                 HideReturnsTransformationMethod.getInstance()
@@ -84,69 +81,10 @@ class SignInActivity : BaseActivity() {
         }
 
     }
-
-    private fun signInWithGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        resultLauncher.launch(signInIntent)
-    }
-
-    private var resultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)!!
-                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
-                firebaseAuthWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
-            }
-        }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        showProgressBar()
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    hideProgressBar()
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    updateUI(null)
-                }
-            }
-    }
-
-    private fun updateUI(currentUser: FirebaseUser?) {
-        if (currentUser != null){
-            startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-            finish()
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-
-    companion object {
-        private const val TAG = "SignInActivity"
-    }
-
     private fun signInUser() {
         val email = binding?.etSinInEmail?.text.toString()
         val password = binding?.etSinInPassword?.text.toString()
+//        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
 
         if (validateForm(email, password)) {
             val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
@@ -164,18 +102,80 @@ class SignInActivity : BaseActivity() {
 
                                 lifecycleScope.launch {
                                     loginManager.saveLoginData(user.email ?: "", userResponse.accessToken ?: "",user.username?:"")
+                                    // Start MainActivity
+                                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                                    Log.i("username", user.username!!)
+//                                    Log.i("token", userResponse.accessToken!!)
+
+                                    Log.i("email", user.email!!)
                                 }
-                                startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                                Log.i("username", user.username!!)
-                                Log.i("email", user.email!!)
+                            }
+                            else{
+
                             }
                         }
+                        else{
+
+                        }
+                    }
+                    else{
+
                     }
                 }
                 override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
                     Log.e("Error", t.message!!)
                 }
             })
+        }
+    }
+
+    private fun signInWithGoogle()
+    {
+        val signInIntent = googleSignInClient.signInIntent
+        launcher.launch(signInIntent)
+
+    }
+
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    { result ->
+        if (result.resultCode == Activity.RESULT_OK)
+        {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleResults(task)
+        }
+    }
+
+    private fun handleResults(task: Task<GoogleSignInAccount>){
+        if (task.isSuccessful)
+        {
+            val account:GoogleSignInAccount? = task.result
+            if (account!=null){
+                updateUI(account)
+            } else {
+                showToast(this, "Google Sign-In failed. Please try again.")
+            }
+        }
+        else
+        {
+            showToast(this, "Sign In Failed, Try Again Later")
+        }
+    }
+
+    private fun updateUI(account: GoogleSignInAccount){
+        showProgressBar()
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful)
+            {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+                hideProgressBar()
+            }
+            else
+            {
+                showToast(this, "Can't login currently, Try after sometime")
+                hideProgressBar()
+            }
         }
     }
 

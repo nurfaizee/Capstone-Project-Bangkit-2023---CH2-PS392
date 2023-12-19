@@ -2,6 +2,7 @@ package com.dicoding.bottomnavigationbar.ui.Retrofit
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,12 +18,41 @@ class Retro {
             .client(createOkHttpClient()) // Optionally, you can customize the OkHttpClient
             .build()
     }
+    fun getRetroClientInstanceStunting(): Retrofit {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
 
+        return Retrofit.Builder()
+            .baseUrl("https://dentingmodel1-asuptnnvoa-as.a.run.app/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
+    }
+
+//    private fun createOkHttpClients(): OkHttpClient {
+//        return OkHttpClient.Builder()
+//            .addInterceptor { chain ->
+//                val originalRequest = chain.request()
+//                val newUrl = originalRequest.url().newBuilder()
+//                    .build()
+//
+//                val newRequest = originalRequest.newBuilder()
+//                    .url(newUrl)
+//                    .build()
+//
+//                chain.proceed(newRequest)
+//            }
+//            .build()
+//    }
     private fun createOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val originalRequest = chain.request()
-                val newUrl = originalRequest.url().newBuilder()
+                val newUrl = originalRequest.url.newBuilder()
                     .addQueryParameter("api_key", API_KEY)
                     .build()
 
@@ -34,4 +64,5 @@ class Retro {
             }
             .build()
     }
+
 }
