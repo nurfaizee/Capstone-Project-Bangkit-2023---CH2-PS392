@@ -20,26 +20,77 @@ object DataAhliGizi {
             "10 Tahun",
             "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
         ),
-//        AhliGizi(
-//            "Dr. Laura",
-//            "Rs. Pusat Medika",
-//            "08123456789",
-//            "Senin-Sabtu, 09:00-16:00",
-//            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg"
-//        ),
-//        AhliGizi(
-//            "Dr. Sarah",
-//            "Rs. Bunda",
-//            "08567890123",
-//            "Senin-Jumat, 10:00-17:00",
-//            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg"
-//        ),
-//        AhliGizi(
-//            "Dr. Robert",
-//            "Rs. Harapan Kita",
-//            "08765432100",
-//            "Senin-Jumat, 08:30-16:30",
-//            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg"
-//        )
+        AhliGizi(
+            "Dr. Johan",
+            "Rs. Sehat Bahagia",
+            "0895389528226",
+            "Senin-Jumat\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Michel",
+            "Rs. Sentosa",
+            "08819891602",
+            "Senin-Kamis\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Johan",
+            "Rs. Sehat Bahagia",
+            "0895389528226",
+            "Senin-Jumat\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Michel",
+            "Rs. Sentosa",
+            "08819891602",
+            "Senin-Kamis\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Johan",
+            "Rs. Sehat Bahagia",
+            "0895389528226",
+            "Senin-Jumat\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Michel",
+            "Rs. Sentosa",
+            "08819891602",
+            "Senin-Kamis\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Johan",
+            "Rs. Sehat Bahagia",
+            "0895389528226",
+            "Senin-Jumat\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
+        AhliGizi(
+            "Dr. Michel",
+            "Rs. Sentosa",
+            "08819891602",
+            "Senin-Kamis\n08:00-15:00",
+            "https://cdn1-production-images-kly.akamaized.net/2PH1A8V07tl-QWHVTijc4Oxwb9g=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3257940/original/021306300_1601874324-pexels-gustavo-fring-4173251.jpg",
+            "10 Tahun",
+            "Pada tanggal 4 Desember 2023, Rumah Sakit XYZ meraih penghargaan bergengsi sebagai rumah sakit dengan kualitas pelayanan terbaik di tahun ini. Penghargaan ini diberikan oleh Asosiasi Kesehatan Nasional sebagai bentuk pengakuan atas dedikasi dan komitmen Rumah Sakit XYZ dalam menyediakan pelayanan kesehatan yang terbaik bagi masyarakat.yak."
+        ),
     )
 }
