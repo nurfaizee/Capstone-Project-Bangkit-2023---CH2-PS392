@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.databinding.ActivityBmiBinding
 
@@ -19,12 +17,9 @@ class BMIActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBmiBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.title = "Hitung BMI"
 
         setupButtonListeners()
-        
-        binding.btnBack.setOnClickListener {
-            onBackPressed()
-        }
 
     }
 
@@ -62,26 +57,17 @@ class BMIActivity : AppCompatActivity() {
 
 
     private fun calculateBmi() {
-        val weightStr = binding.etNumberBerat.text.toString()
-        val heightStr = binding.etNumberTinggi.text.toString()
+        val weight = binding.etNumberBerat.text.toString().toFloatOrNull() ?: 0f
+        val height = binding.etNumberTinggi.text.toString().toFloatOrNull() ?: 0f
+        Log.d("SendData", "  detectBMI")
+        Log.d("SendData", "  Tinggi Badan: $height")
+        Log.d("SendData", "  Berat Badan: $weight")
+        val bmi = calculateBmiValue(weight, height)
+        val bmiCategory = getBmiCategory(bmi)
 
-        if (weightStr.isEmpty() || weightStr.toFloatOrNull() == 0.0f || heightStr.isEmpty() || heightStr.toFloatOrNull() == 0.0f) {
-            Toast.makeText(this, "Lengkapi Data", Toast.LENGTH_SHORT).show()
-            return
-        } else{
-            val weight = weightStr.toFloatOrNull() ?: 0f
-            val height = heightStr.toFloatOrNull() ?: 0f
+        val resultText = "BMI: $bmi\nAnda Termasuk Kedalam Kondisi $bmiCategory"
 
-            Log.d("SendData", "  detectBMI")
-            Log.d("SendData", "  Tinggi Badan: $height")
-            Log.d("SendData", "  Berat Badan: $weight")
-            val bmi = calculateBmiValue(weight, height)
-            val bmiCategory = getBmiCategory(bmi)
-
-            val resultText = "BMI: $bmi\nAnda Termasuk Kedalam Kondisi $bmiCategory"
-
-            showResultDialog(resultText, getMessage(bmiCategory))
-        }
+        showResultDialog(resultText, getMessage(bmiCategory))
     }
 
     private fun calculateBmiValue(weight: Float, height: Float): Float {

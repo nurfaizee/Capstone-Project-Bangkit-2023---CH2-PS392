@@ -56,6 +56,11 @@ class SignInActivity : BaseActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
         }
+
+        binding?.tvForgotPassword?.setOnClickListener{
+            startActivity(Intent(this,ForgetPasswordActivity::class.java))
+        }
+
         binding?.btnSignIn?.setOnClickListener {
             lifecycleScope.launch {
                 signInUser()
@@ -77,6 +82,8 @@ class SignInActivity : BaseActivity() {
 
     }
     private fun signInUser() {
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+
         val email = binding?.etSinInEmail?.text.toString()
         val password = binding?.etSinInPassword?.text.toString()
 //        startActivity(Intent(this@SignInActivity, MainActivity::class.java))

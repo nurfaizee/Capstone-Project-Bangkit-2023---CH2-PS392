@@ -12,6 +12,6 @@ data class Rs(
     val jamBuka: String,
     val kontak: String,
     val photo: String,
-    val lat: String,
-    val lon: String
+    val lan: String,
+    val lat: String
 ) : Parcelable

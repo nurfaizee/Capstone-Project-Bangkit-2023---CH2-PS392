@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +16,9 @@
         android:theme="@style/Theme.BottomNavigationBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.gizi.GiziActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.daftarRS.DetailRsActivity"
             android:exported="false" />
@@ -93,7 +95,6 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="true">
 
             <!-- <intent-filter> -->

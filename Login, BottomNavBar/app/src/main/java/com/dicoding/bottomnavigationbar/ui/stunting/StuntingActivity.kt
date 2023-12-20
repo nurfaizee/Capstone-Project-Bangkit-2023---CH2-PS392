@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -18,11 +19,13 @@ import com.dicoding.bottomnavigationbar.ui.login.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 @SuppressLint("SetTextI18n")
 class StuntingActivity : BaseActivity() {
     private lateinit var binding: ActivityStuntingBinding
     private var selectedGender: String = ""
     private lateinit var viewModel: StuntingViewModel
+//    private var userData: UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,19 +72,6 @@ class StuntingActivity : BaseActivity() {
         binding.btnLakilaki.setBackgroundColor(ContextCompat.getColor(this, lakilakiColor))
         binding.btnPerempuan.setBackgroundColor(ContextCompat.getColor(this, perempuanColor))
     }
-//        binding.btnLakilaki.setOnClickListener { lakilaki() }
-//        binding.btnPerempuan.setOnClickListener { perempuan() }
-//    }
-//
-//    private fun lakilaki() {
-//        selectedGender = "Laki-laki"
-//        binding.btnLakilaki.text = selectedGender
-//    }
-//
-//    private fun perempuan() {
-//        selectedGender = "Perempuan"
-//        binding.btnPerempuan.text = selectedGender
-//    }
 
     private fun increaseWeight() {
         val currentWeight = binding.etBerat.text.toString().toIntOrNull() ?: 0
@@ -134,18 +124,6 @@ class StuntingActivity : BaseActivity() {
 
             sendData(selectedGender, height, weight, age)
         } else showToast(this, "Lengkapi Data")
-//        showProgressBar()
-//
-//        val weight = binding.etBerat.text.toString().toIntOrNull() ?: 0
-//        val height = binding.etTinggibadan.text.toString().toIntOrNull() ?: 0
-//        val age = binding.etUmur.text.toString().toIntOrNull() ?: 0
-//        val gender = selectedGender
-//        Log.d("SendData", "  detectStunting")
-//        Log.d("SendData", "  Jenis Kelamin: $gender")
-//        Log.d("SendData", "  Tinggi Badan: $height")
-//        Log.d("SendData", "  Berat Badan: $weight")
-//        Log.d("SendData", "  Usia: $age")
-//        sendData( selectedGender, height,weight,  age)
     }
     private fun isDataValid(): Boolean {
         return (
@@ -165,7 +143,8 @@ class StuntingActivity : BaseActivity() {
         Log.d("SendData", "  Tinggi Badan: $tinggiBadan")
         Log.d("SendData", "  Berat Badan: $beratBadan")
         Log.d("SendData", "  Usia: $usia")
-        val request= StuntingRequest( jenisKelamin,tinggiBadan,beratBadan,  usia)
+        val request = StuntingRequest(jenisKelamin, tinggiBadan, beratBadan, usia)
+
         // Execute the network request asynchronously
         val call = retro.deteksiStunting(request)
 
@@ -177,12 +156,24 @@ class StuntingActivity : BaseActivity() {
                     // Handle successful response
                     val responseData = response.body()
                     val prediksi = responseData?.prediction
-                    val hasil= kategori("$prediksi", selectedGender)
+                    val hasil = kategori("$prediksi", selectedGender)
                     if (responseData != null) {
                         // Data terkirim dengan sukses, lakukan sesuatu dengan respons
                         val resultText = "Predictions: $prediksi"
                         Log.d("SendData", "  kode: $response")
                         Log.d("SendData", " $responseData")
+
+                        // Simpan data ke dalam database
+//                        userData.let { userData ->
+//                            userData?.berat = beratBadan
+//                            userData?.tinggi = tinggiBadan
+//                            userData?.umur = usia
+//                            userData?.gender = jenisKelamin
+//                            userData?.hasil = prediksi
+//
+//                        }
+//                        saveToDatabase()
+//                        showToasts(getString(R.string.added))
 
                         showResultDialog(hasil, getMessage("$prediksi"))
                     } else {
@@ -203,6 +194,14 @@ class StuntingActivity : BaseActivity() {
             }
         })
     }
+
+    // Fungsi untuk menyimpan data ke dalam database
+//    private fun saveToDatabase() {
+//        userData.let { userData->
+//            userData?.tanggal= DateHelper.getCurrentDate()
+//        }
+//        viewModel.insert(userData as UserData)
+//    }
     private fun getMessage(category: String): String {
         return when (category) {
             "Tidak_Berisiko" -> "Perbanyak asupan protein dan lemak untuk meningkatkan berat badan sikecil"
@@ -249,4 +248,8 @@ class StuntingActivity : BaseActivity() {
 
         dialog.show()
     }
+    private fun showToasts(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
 }
