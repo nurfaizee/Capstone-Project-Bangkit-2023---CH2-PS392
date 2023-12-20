@@ -56,11 +56,6 @@ class SignInActivity : BaseActivity() {
             startActivity(Intent(this, SignUpActivity::class.java))
             finish()
         }
-
-        binding?.tvForgotPassword?.setOnClickListener{
-            startActivity(Intent(this,ForgetPasswordActivity::class.java))
-        }
-
         binding?.btnSignIn?.setOnClickListener {
             lifecycleScope.launch {
                 signInUser()

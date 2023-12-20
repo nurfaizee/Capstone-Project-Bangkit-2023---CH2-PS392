@@ -17,6 +17,7 @@ import com.dicoding.bottomnavigationbar.databinding.ActivitySplashScreenBinding
 import com.dicoding.bottomnavigationbar.ui.login.GetStartedActivity
 import com.dicoding.bottomnavigationbar.ui.login.SignInActivity
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -25,6 +26,7 @@ import kotlinx.coroutines.launch
 class SplashScreen : AppCompatActivity() {
     private lateinit var loginManager: LoginManager
     private lateinit var binding: ActivitySplashScreenBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class SplashScreen : AppCompatActivity() {
         supportActionBar?.hide()
         playAnimation()
 
+        auth = FirebaseAuth.getInstance()
         loginManager = LoginManager(this)
 
         Handler().postDelayed({
@@ -50,7 +53,11 @@ class SplashScreen : AppCompatActivity() {
             val intent = if (!email.isNullOrBlank() && !accessToken.isNullOrBlank()) {
                 Intent(this@SplashScreen, MainActivity::class.java)
             } else {
-                Intent(this@SplashScreen, SignInActivity::class.java)
+                if (auth.currentUser != null) {
+                    Intent(this@SplashScreen, MainActivity::class.java)
+                } else {
+                    Intent(this@SplashScreen, SignInActivity::class.java)
+                }
             }
 
             startActivity(intent)
