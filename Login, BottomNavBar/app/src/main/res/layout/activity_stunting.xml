@@ -162,7 +162,7 @@
                     android:background="@drawable/button_background"
                     android:gravity="center"
                     android:onClick="onDecreaseButtonClick"
-                    android:text="-"
+                    android:text="+"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="18sp"

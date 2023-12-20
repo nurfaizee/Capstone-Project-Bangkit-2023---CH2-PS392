@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Add your custom UI components here -->
+    <TextView
+        android:id="@+id/giziJudul"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Lemak"
+        android:textColor="@android:color/black"
+        android:textSize="30sp"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2">
+
+        <!-- Lemak -->
+        <GridLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4">
+
+            <TextView
+                android:id="@+id/tvLemakTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lemak:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvLemakValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="100 gram"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </GridLayout>
+
+        <!-- Protein -->
+        <GridLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4">
+
+            <TextView
+                android:id="@+id/tvProteinTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Protein:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvProteinValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="100 gram"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </GridLayout>
+
+        <!-- Vitamin A -->
+        <GridLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4">
+
+            <TextView
+                android:id="@+id/tvVitaminATitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Vitamin A:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvVitaminAValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="50 IU"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </GridLayout>
+
+        <!-- Vitamin B -->
+        <GridLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4">
+
+            <TextView
+                android:id="@+id/tvVitaminBTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Vitamin B:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvVitaminBValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="10 mg"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </GridLayout>
+
+        <GridLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4">
+
+            <TextView
+                android:id="@+id/tvKalsiumTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Kalium:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvkaliumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="195 mg"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </GridLayout>
+
+        <!-- Vitamin B -->
+        <GridLayout
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:alignmentMode="alignMargins"
+            android:columnCount="4">
+
+            <TextView
+                android:id="@+id/tvGulaitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Gula:"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvGulaValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="10 mg"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </GridLayout>
+
+        <!-- Tambahkan variasi lainnya sesuai kebutuhan -->
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btnDialogOk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_background"
+        android:text="Kembali"/>
+</LinearLayout>

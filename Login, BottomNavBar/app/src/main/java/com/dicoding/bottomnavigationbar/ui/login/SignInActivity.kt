@@ -82,6 +82,8 @@ class SignInActivity : BaseActivity() {
 
     }
     private fun signInUser() {
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+
         val email = binding?.etSinInEmail?.text.toString()
         val password = binding?.etSinInPassword?.text.toString()
 //        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
