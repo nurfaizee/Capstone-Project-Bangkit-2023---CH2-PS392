@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="68dp"
-            android:text="Hello! Register to get started"
+            android:text="Halo!!, Daftarkan Akunmu Sekarang"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"

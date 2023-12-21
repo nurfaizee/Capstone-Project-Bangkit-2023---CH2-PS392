@@ -12,10 +12,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.LoginManager
+import com.dicoding.bottomnavigationbar.data.retrofit.LoginResponse
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignInBinding
 import com.dicoding.bottomnavigationbar.data.retrofit.Retro
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
-import com.dicoding.bottomnavigationbar.data.retrofit.UsersResponse
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -77,6 +77,7 @@ class SignInActivity : BaseActivity() {
 
     }
     private fun signInUser() {
+
         val email = binding?.etSinInEmail?.text.toString()
         val password = binding?.etSinInPassword?.text.toString()
 //        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
@@ -84,19 +85,19 @@ class SignInActivity : BaseActivity() {
         if (validateForm(email, password)) {
             val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
 
-            retro.login(email = email, password = password).enqueue(object : Callback<UsersResponse> {
-                override fun onResponse(call: Call<UsersResponse>, response: Response<UsersResponse>) {
+            retro.login(email = email, password = password).enqueue(object : Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     Log.i("SignInActivity", "onResponse: Start")
                     if (response.isSuccessful) {
-                        val userResponse = response.body()
+                        val loginResponse = response.body()
 
-                        if (userResponse != null) {
-                            val user = userResponse.user
+                        if (loginResponse != null) {
+                            val user = loginResponse.data
 
                             if (user != null) {
 
                                 lifecycleScope.launch {
-                                    loginManager.saveLoginData(user.email ?: "", userResponse.accessToken ?: "",user.username?:"")
+                                    loginManager.saveLoginData(user.email ?: "", loginResponse.data.accessToken ?: "",user.username?:"")
                                     // Start MainActivity
                                     startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                                     Log.i("username", user.username!!)
@@ -117,7 +118,7 @@ class SignInActivity : BaseActivity() {
 
                     }
                 }
-                override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e("Error", t.message!!)
                 }
             })

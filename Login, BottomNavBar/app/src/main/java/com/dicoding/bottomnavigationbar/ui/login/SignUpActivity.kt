@@ -7,6 +7,7 @@ import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.data.LoginManager
+import com.dicoding.bottomnavigationbar.data.retrofit.LoginResponse
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignUpBinding
 import com.dicoding.bottomnavigationbar.data.retrofit.Retro
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
@@ -48,21 +49,21 @@ class SignUpActivity : BaseActivity() {
         {
             val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
             retro.register(username = name,email = email, password = password).enqueue(object :
-                Callback<UsersResponse> {
-                override fun onResponse(call: Call<UsersResponse>, response: Response<UsersResponse>) {
+                Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
                         showProgressBar()
-                        val userResponse = response.body()
+                        val loginResponse = response.body()
 
-                        if (userResponse != null) {
-                            val user = userResponse.user
+                        if (loginResponse != null) {
+                            val user = loginResponse.data
 
                             if (user != null) {
                                 lifecycleScope.launch {
-                                    loginManager.saveLoginData(user.email ?: "", userResponse.accessToken ?: "", user.username ?: "")
+                                    loginManager.saveLoginData(user.email ?: "", loginResponse.data.accessToken ?: "", user.username ?: "")
                                 }
                                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                                val token = userResponse.accessToken
+                                val token = loginResponse.data.accessToken
                                 showToast(this@SignUpActivity, "$token")
                                 showToast(this@SignUpActivity, "User Id Created Successfully")
                                 hideProgressBar()
@@ -83,7 +84,7 @@ class SignUpActivity : BaseActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     // Handle failure
                     Log.e("Error", t.message!!)
                 }

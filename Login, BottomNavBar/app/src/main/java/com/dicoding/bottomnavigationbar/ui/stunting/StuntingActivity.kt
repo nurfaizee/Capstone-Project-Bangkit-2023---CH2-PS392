@@ -18,11 +18,13 @@ import com.dicoding.bottomnavigationbar.ui.login.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 @SuppressLint("SetTextI18n")
 class StuntingActivity : BaseActivity() {
     private lateinit var binding: ActivityStuntingBinding
     private var selectedGender: String = ""
     private lateinit var viewModel: StuntingViewModel
+//    private var userData: UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,12 @@ class StuntingActivity : BaseActivity() {
             }
         }
         setupButtonListeners()
+
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun setupButtonListeners() {
@@ -69,19 +77,6 @@ class StuntingActivity : BaseActivity() {
         binding.btnLakilaki.setBackgroundColor(ContextCompat.getColor(this, lakilakiColor))
         binding.btnPerempuan.setBackgroundColor(ContextCompat.getColor(this, perempuanColor))
     }
-//        binding.btnLakilaki.setOnClickListener { lakilaki() }
-//        binding.btnPerempuan.setOnClickListener { perempuan() }
-//    }
-//
-//    private fun lakilaki() {
-//        selectedGender = "Laki-laki"
-//        binding.btnLakilaki.text = selectedGender
-//    }
-//
-//    private fun perempuan() {
-//        selectedGender = "Perempuan"
-//        binding.btnPerempuan.text = selectedGender
-//    }
 
     private fun increaseWeight() {
         val currentWeight = binding.etBerat.text.toString().toIntOrNull() ?: 0
@@ -134,18 +129,6 @@ class StuntingActivity : BaseActivity() {
 
             sendData(selectedGender, height, weight, age)
         } else showToast(this, "Lengkapi Data")
-//        showProgressBar()
-//
-//        val weight = binding.etBerat.text.toString().toIntOrNull() ?: 0
-//        val height = binding.etTinggibadan.text.toString().toIntOrNull() ?: 0
-//        val age = binding.etUmur.text.toString().toIntOrNull() ?: 0
-//        val gender = selectedGender
-//        Log.d("SendData", "  detectStunting")
-//        Log.d("SendData", "  Jenis Kelamin: $gender")
-//        Log.d("SendData", "  Tinggi Badan: $height")
-//        Log.d("SendData", "  Berat Badan: $weight")
-//        Log.d("SendData", "  Usia: $age")
-//        sendData( selectedGender, height,weight,  age)
     }
     private fun isDataValid(): Boolean {
         return (
@@ -165,7 +148,8 @@ class StuntingActivity : BaseActivity() {
         Log.d("SendData", "  Tinggi Badan: $tinggiBadan")
         Log.d("SendData", "  Berat Badan: $beratBadan")
         Log.d("SendData", "  Usia: $usia")
-        val request= StuntingRequest( jenisKelamin,tinggiBadan,beratBadan,  usia)
+        val request = StuntingRequest(jenisKelamin, tinggiBadan, beratBadan, usia)
+
         // Execute the network request asynchronously
         val call = retro.deteksiStunting(request)
 
@@ -177,12 +161,24 @@ class StuntingActivity : BaseActivity() {
                     // Handle successful response
                     val responseData = response.body()
                     val prediksi = responseData?.prediction
-                    val hasil= kategori("$prediksi", selectedGender)
+                    val hasil = kategori("$prediksi", selectedGender)
                     if (responseData != null) {
                         // Data terkirim dengan sukses, lakukan sesuatu dengan respons
                         val resultText = "Predictions: $prediksi"
                         Log.d("SendData", "  kode: $response")
                         Log.d("SendData", " $responseData")
+
+                        // Simpan data ke dalam database
+//                        userData.let { userData ->
+//                            userData?.berat = beratBadan
+//                            userData?.tinggi = tinggiBadan
+//                            userData?.umur = usia
+//                            userData?.gender = jenisKelamin
+//                            userData?.hasil = prediksi
+//
+//                        }
+//                        saveToDatabase()
+//                        showToasts(getString(R.string.added))
 
                         showResultDialog(hasil, getMessage("$prediksi"))
                     } else {
@@ -203,21 +199,42 @@ class StuntingActivity : BaseActivity() {
             }
         })
     }
+
+    // Fungsi untuk menyimpan data ke dalam database
+//    private fun saveToDatabase() {
+//        userData.let { userData->
+//            userData?.tanggal= DateHelper.getCurrentDate()
+//        }
+//        viewModel.insert(userData as UserData)
+//    }
     private fun getMessage(category: String): String {
         return when (category) {
-            "Tidak_Berisiko" -> "Perbanyak asupan protein dan lemak untuk meningkatkan berat badan sikecil"
-            "Beresiko_Ringan" -> "Pertahankan asupan gizi sikecil untuk memenuhi tumbuh kembang yang baik"
-            "Beresiko_Sedang" -> "Kurangi asupan lemak sikecil dan perbanyak asupan serat hijau"
-            "Beresiko_Tinggi" -> "kurangi asupan lemak si kecil dan jalani atur diet secara berkala"
+            "Tidak_Berisiko" -> "1. Tetapkan pola makan yang sehat dan seimbang.\n" +
+                    "2. Ajarkan gaya hidup aktif dan bergerak.\n" +
+                    "3. Perhatikan pertumbuhan dan perkembangan anak secara berkala.\n" +
+                    "4. Lakukan pemeriksaan kesehatan rutin."
+            "Beresiko_Ringan" -> "1. Tingkatkan variasi dalam pola makan anak dengan memasukkan berbagai jenis makanan sehat.\n" +
+                    "2. Pastikan anak mendapatkan asupan nutrisi yang mencukupi untuk pertumbuhan dan perkembangannya.\n" +
+                    "3. Ajarkan kebiasaan hidup sehat, seperti olahraga teratur dan kebersihan diri.\n" +
+                    "4. Konsultasikan dengan dokter atau ahli gizi untuk saran lebih lanjut."
+            "Beresiko_Sedang" -> "1. Segera konsultasikan dengan dokter atau ahli gizi untuk penilaian lebih lanjut.\n" +
+                    "2. Ikuti saran dan rekomendasi yang diberikan oleh profesional kesehatan.\n" +
+                    "3. Pantau pola makan dan aktivitas anak secara ketat."
+            "Beresiko_Tinggi" -> "1. Segera konsultasikan dengan dokter atau spesialis gizi anak.\n" +
+                    "2. Ikuti rencana perawatan yang direkomendasikan.\n" +
+                    "3. Perluasan pemeriksaan kesehatan dan pemantauan secara teratur.\n" +
+                    "4. Libatkan dukungan dari keluarga dan lingkungan sekitar untuk mendukung perubahan gaya hidup dan pola makan anak.\n" +
+                    "5. Penting untuk dicatat bahwa saran ini bersifat umum, dan setiap anak mungkin memerlukan pendekatan yang disesuaikan dengan kebutuhan dan kondisi kesehatannya. Konsultasikan selalu dengan profesional kesehatan untuk panduan yang lebih spesifik."
 
             else -> ""
+
         }
     }
     private fun kategori(category: String, gender: String): String {
         val genderMessage = if (gender == "Perempuan") {
-            "Anak perempuan Anda "
+            "Anak perempuan anda "
         } else {
-            "Anak laki-laki Anda "
+            "Anak laki-laki anda "
         }
         return when (category) {
             "Tidak_Berisiko" -> "$genderMessage Tidak Berisiko"
@@ -229,7 +246,7 @@ class StuntingActivity : BaseActivity() {
         }
     }
     private fun showResultDialog(resultText: String, message: String) {
-        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_bmi, null)
+        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_, null)
         val tvDialogTitle = dialogView.findViewById<TextView>(R.id.tvDialogTitle)
         val tvDialogMessage = dialogView.findViewById<TextView>(R.id.tvDialogMessage)
         val btnDialogOk = dialogView.findViewById<Button>(R.id.btnDialogOk)
@@ -249,4 +266,5 @@ class StuntingActivity : BaseActivity() {
 
         dialog.show()
     }
+
 }

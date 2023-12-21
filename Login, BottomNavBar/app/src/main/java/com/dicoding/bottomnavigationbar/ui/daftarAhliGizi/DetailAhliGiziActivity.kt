@@ -18,6 +18,10 @@ class DetailAhliGiziActivity : AppCompatActivity() {
         binding = ActivityDetailAhliGiziBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
         val receivedData: AhliGizi? = intent.getParcelableExtra("DATA")
 
         if (receivedData != null) {

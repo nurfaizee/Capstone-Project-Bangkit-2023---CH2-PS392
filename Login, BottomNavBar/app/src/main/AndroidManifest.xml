@@ -2,9 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -18,6 +23,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.gizi.GiziActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.daftarRS.DetailRsActivity"
             android:exported="false" />
         <activity
@@ -30,7 +38,7 @@
             android:name=".ui.about.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.fragment.DetailArtikelActivity"
+            android:name=".ui.daftarArtikel.DetailArtikelActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -53,10 +61,10 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ui.daftarAhliGizi.DetailAhliGiziActivity"
-            android:parentActivityName=".ui.fragment.SearchFragment">
+            android:parentActivityName=".ui.daftarArtikel.SearchFragment">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.fragment.SearchFragment" />
+                android:value=".ui.daftarArtikel.SearchFragment" />
         </activity>
         <activity
             android:name=".ui.daftarAhliGizi.DaftarAhliGizi"

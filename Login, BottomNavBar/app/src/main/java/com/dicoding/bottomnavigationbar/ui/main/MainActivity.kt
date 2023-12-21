@@ -5,9 +5,9 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.databinding.ActivityMainBinding
-import com.dicoding.bottomnavigationbar.ui.fragment.FavoriteFragment
+import com.dicoding.bottomnavigationbar.ui.fragment.HistoryFragment
 import com.dicoding.bottomnavigationbar.ui.fragment.HomeFragment
-import com.dicoding.bottomnavigationbar.ui.fragment.SearchFragment
+import com.dicoding.bottomnavigationbar.ui.daftarArtikel.SearchFragment
 import com.dicoding.bottomnavigationbar.ui.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +36,7 @@ import com.google.firebase.auth.FirebaseAuth
                     true
                 }
                 R.id.bottom_favorite -> {
-                    replaceFragment(FavoriteFragment())
+                    replaceFragment(HistoryFragment())
                     true
                 }
                 R.id.bottom_profile -> {

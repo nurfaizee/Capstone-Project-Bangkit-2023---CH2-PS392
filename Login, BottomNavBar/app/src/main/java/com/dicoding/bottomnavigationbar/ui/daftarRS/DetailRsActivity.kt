@@ -1,5 +1,7 @@
 package com.dicoding.bottomnavigationbar.ui.daftarRS
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -32,7 +34,11 @@ class DetailRsActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-       rsData = intent.getParcelableExtra("DATA")
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        rsData = intent.getParcelableExtra("DATA")
 
         if (rsData != null) {
             binding.tvNamaRs.text = rsData!!.nama
@@ -46,6 +52,15 @@ class DetailRsActivity : AppCompatActivity(), OnMapReadyCallback {
                 .load(rsData!!.photo)
                 .error(R.drawable.baseline_error_24)
                 .into(binding.ivDetailRs)
+
+            binding.tvHubungiWa.setOnClickListener {
+                val formattedPhoneNumber = replaceLeading0With62(rsData!!.kontak)
+                if (isValidPhoneNumber(formattedPhoneNumber)) {
+                    openWhatsApp(formattedPhoneNumber)
+                } else {
+                    Toast.makeText(this, "Nomor telepon tidak valid", Toast.LENGTH_SHORT).show()
+                }
+            }
         } else {
             Toast.makeText(this, "Data tidak valid", Toast.LENGTH_SHORT).show()
             finish()
@@ -73,6 +88,22 @@ class DetailRsActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             println("Nilai Latitude atau Longitude tidak valid")
         }
+    }
+
+    private fun isValidPhoneNumber(phoneNumber: String): Boolean {
+        return phoneNumber.length >= 9 && phoneNumber.all { it.isDigit() }
+    }
+    private fun replaceLeading0With62(phoneNumber: String): String {
+        return if (phoneNumber.startsWith("0")) {
+            "62" + phoneNumber.substring(1)
+        } else {
+            phoneNumber
+        }
+    }
+    private fun openWhatsApp(phoneNumber: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse("https://wa.me/$phoneNumber")
+        startActivity(intent)
     }
     companion object {
         const val DEFAULT_ZOOM = 10.0f

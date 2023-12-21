@@ -34,7 +34,7 @@
                 android:id="@+id/tv_sd2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selamat datang admin kafe Yuk login biar bisa akses fitur kita"
+                android:text="Selamat datang di aplikasi denting, Yuk login biar bisa akses fitur kita"
                 android:textColor="@color/black"
                 android:textSize="13.5sp"
                 android:gravity="center_horizontal"
