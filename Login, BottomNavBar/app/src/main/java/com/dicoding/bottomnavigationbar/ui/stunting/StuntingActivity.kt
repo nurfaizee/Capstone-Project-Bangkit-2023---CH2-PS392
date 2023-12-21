@@ -163,7 +163,6 @@ class StuntingActivity : BaseActivity() {
                     val prediksi = responseData?.prediction
                     val hasil = kategori("$prediksi", selectedGender)
                     if (responseData != null) {
-                        // Data terkirim dengan sukses, lakukan sesuatu dengan respons
                         val resultText = "Predictions: $prediksi"
                         Log.d("SendData", "  kode: $response")
                         Log.d("SendData", " $responseData")

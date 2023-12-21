@@ -1,11 +1,13 @@
 package com.dicoding.bottomnavigationbar.ui.fragment
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,6 +53,10 @@ class HomeFragment : Fragment() {
         val cariAhliGizi = binding.cariAhliGizi
         val aboutbutton = binding.aboutbutton
         val deteksiGizi = binding.deteksiGiziButton
+        val event = binding.ivCarousel
+        event.setOnClickListener {
+            startEvent()
+        }
 
 
 //        carouselView = binding.ivCarousel
@@ -130,5 +136,21 @@ class HomeFragment : Fragment() {
     private fun startGiziActivity() {
         val intent = Intent(activity, GiziActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun startEvent() {
+        val websiteUri = Uri.parse("https://docs.google.com/forms/d/1ao24C5zW97MEty3F5V0gADBpjHmSB06guL5kmplzOr0/edit") // Ganti URL sesuai kebutuhan
+
+        val intent = Intent(Intent.ACTION_VIEW)
+
+        // Memeriksa apakah terdapat aplikasi yang dapat menangani intent ini
+        if (activity?.let { intent.resolveActivity(it.packageManager) } != null) {
+            intent.data = Uri.parse(websiteUri.toString())
+            startActivity(intent)
+
+        } else {
+            // Jika tidak ada aplikasi yang dapat menangani intent, Anda dapat memberikan pesan atau menggunakan fallback lainnya.
+            Toast.makeText(activity, "Tidak ada aplikasi yang dapat menangani intent ini.", Toast.LENGTH_SHORT).show()
+        }
     }
 }

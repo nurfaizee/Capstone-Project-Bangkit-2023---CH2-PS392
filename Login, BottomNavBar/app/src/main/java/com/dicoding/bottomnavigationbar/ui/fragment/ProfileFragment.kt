@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.data.LoginManager
@@ -48,29 +49,49 @@ class ProfileFragment : Fragment() {
             binding?.tvEmail?.text = currentUser.email ?: "No email available"
         }
 
-        binding?.btnSignOut?.setOnClickListener{
-            lifecycleScope.launch {
-                when {
-                    auth.currentUser != null -> {
-                        try {
-                            auth.signOut()
-                            navigateToSignInActivity()
-                        } catch (e: Exception) {
-                            Log.e("ProfileFragment", "Error signing out: ${e.message}")
-                        }
-                    }
-                    loginManager.isUserLoggedIn.first() -> {
-                        loginManager.clearLoginData()
-                        navigateToSignInActivity()
+        binding?.btnSignOut?.setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+        return binding?.root
+    }
 
-                    }
-                    else -> {
-                        // Handle the case when neither Firebase Auth nor LoginManager has a logged-in user
-                        Log.d("ProfileFragment", "No user is logged in.")
+
+    private fun showLogoutConfirmationDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Logout")
+        builder.setMessage("Are you sure you want to logout?")
+        builder.setPositiveButton("Yes") { dialog, which ->
+            logoutUser()
+        }
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun logoutUser() {
+        lifecycleScope.launch {
+            when {
+                auth.currentUser != null -> {
+                    try {
+                        auth.signOut()
+                        navigateToSignInActivity()
+                    } catch (e: Exception) {
+                        Log.e("ProfileFragment", "Error signing out: ${e.message}")
                     }
                 }
-            }}
-        return binding?.root
+                loginManager.isUserLoggedIn.first() -> {
+                    loginManager.clearLoginData()
+                    navigateToSignInActivity()
+                }
+                else -> {
+                    // Handle the case when neither Firebase Auth nor LoginManager has a logged-in user
+                    Log.d("ProfileFragment", "No user is logged in.")
+                }
+            }
+        }
     }
 
     private fun navigateToSignInActivity() {

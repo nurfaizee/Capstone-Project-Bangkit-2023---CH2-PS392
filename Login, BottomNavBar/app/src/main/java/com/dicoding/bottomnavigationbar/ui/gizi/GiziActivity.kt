@@ -109,6 +109,8 @@ class GiziActivity : BaseActivity() {
     }
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun uploadImage() {
+        showProgressBar()
+
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
@@ -119,7 +121,6 @@ class GiziActivity : BaseActivity() {
                 imageFile.name,
                 requestImageFile
             )
-            showProgressBar()
 
             lifecycleScope.launch {
                 try {
@@ -130,9 +131,9 @@ class GiziActivity : BaseActivity() {
                         val responseData = successResponse.body()
                         val hasil = responseData?.predictedClass
                         if (responseData != null) {
-                            showToast("Upload successful. Server response: ${responseData}")
+                            println("Upload successful. Server response: ${responseData}")
                         } else {
-                            showToast("Upload successful. No additional data from the server.")
+                            println("Upload successful. No additional data from the server.")
                         }
                         showResultDialog(hasil)
                     } else {
@@ -144,21 +145,19 @@ class GiziActivity : BaseActivity() {
                     }
 
                     showToast(successResponse.toString())
-                    hideProgressBar()
                 } catch (e: HttpException) {
                     // Handle HTTP exception
                     val errorBody = e.response()?.errorBody()?.string()
                     val errorResponse = Gson().fromJson(errorBody, FileResponse::class.java)
                     showToast("HTTP error: ${errorResponse}")
-                    hideProgressBar()
                 } catch (e: Exception) {
                     // Handle other exceptions
                     showToast("Unexpected error: ${e.message}")
+                } finally {
                     hideProgressBar()
                 }
             }
         } ?: showToast(getString(R.string.empty_image_warning))
-        hideProgressBar()
 
     }
     private fun showToast(message: String) {

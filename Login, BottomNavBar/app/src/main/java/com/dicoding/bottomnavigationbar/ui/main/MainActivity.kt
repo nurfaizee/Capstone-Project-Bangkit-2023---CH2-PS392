@@ -15,8 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
  class MainActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
-    private lateinit var auth : FirebaseAuth
-    private var binding : ActivityMainBinding? = null
+     private var binding : ActivityMainBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +34,10 @@ import com.google.firebase.auth.FirebaseAuth
                     replaceFragment(SearchFragment())
                     true
                 }
-                R.id.bottom_favorite -> {
-                    replaceFragment(HistoryFragment())
-                    true
-                }
+//                R.id.bottom_favorite -> {
+//                    replaceFragment(HistoryFragment())
+//                    true
+//                }
                 R.id.bottom_profile -> {
                     replaceFragment(ProfileFragment())
                     true

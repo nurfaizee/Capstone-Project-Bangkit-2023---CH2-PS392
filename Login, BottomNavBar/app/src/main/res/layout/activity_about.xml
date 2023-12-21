@@ -363,7 +363,7 @@
                         android:id="@+id/circleImageView3"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/baseline_schedule_24"
+                        android:src="@drawable/baseline_feed_24"
                         app:civ_circle_background_color="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
