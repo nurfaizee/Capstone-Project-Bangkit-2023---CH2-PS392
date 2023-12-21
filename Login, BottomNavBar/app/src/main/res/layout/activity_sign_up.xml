@@ -103,6 +103,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
+        <CheckBox
+            android:id="@+id/see_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:text="Show Password"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_sin_up_password"
+            tools:alpha="1" />
+
         <Button
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
@@ -110,10 +121,9 @@
             android:background="@drawable/button_background"
             android:text="Register"
             android:textSize="20dp"
-            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_sin_up_password" />
+            app:layout_constraintTop_toBottomOf="@+id/see_password" />
 
         <TextView
             android:id="@+id/tv_slogin"

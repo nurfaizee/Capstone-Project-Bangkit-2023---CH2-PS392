@@ -3,6 +3,8 @@ package com.dicoding.bottomnavigationbar.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.lifecycleScope
@@ -39,6 +41,16 @@ class SignUpActivity : BaseActivity() {
         }
 
         binding?.btnSignUp?.setOnClickListener { registerUser()  }
+
+        binding?.seePassword?.setOnCheckedChangeListener { _, isChecked ->
+            binding?.etSinUpPassword?.transformationMethod = if (isChecked) {
+                HideReturnsTransformationMethod.getInstance()
+            } else {
+                PasswordTransformationMethod.getInstance()
+            }
+            binding?.etSinUpPassword?.text?.let { binding?.etSinUpPassword?.setSelection(it.length) }
+        }
+
     }
 
     private fun registerUser(){

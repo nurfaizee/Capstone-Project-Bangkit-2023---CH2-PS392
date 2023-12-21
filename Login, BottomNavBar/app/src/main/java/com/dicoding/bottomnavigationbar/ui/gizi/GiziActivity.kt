@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -36,6 +37,7 @@ import retrofit2.HttpException
 class GiziActivity : BaseActivity() {
     private val apiConfig = Retro()
     private lateinit var binding: ActivityGiziBinding
+    private lateinit var progressBar: ProgressBar
 
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,11 +49,15 @@ class GiziActivity : BaseActivity() {
         }
         binding.galleryButton.setOnClickListener { startGallery() }
         binding.cameraButton.setOnClickListener { startCamera() }
-        binding.uploadButton.setOnClickListener { uploadImage() }
+        binding.uploadButton.setOnClickListener {
+            uploadImage()
+        }
 
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
+
+        progressBar = binding.progressBar
 
     }
     private var currentImageUri: Uri? = null
@@ -73,10 +79,12 @@ class GiziActivity : BaseActivity() {
             REQUIRED_PERMISSION
         ) == PackageManager.PERMISSION_GRANTED
     private fun startGallery() {
+        currentImageUri = null
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
     private fun startCamera() {
+        currentImageUri = null
         currentImageUri = getImageUri(this)
         launcherIntentCamera.launch(currentImageUri)
     }
@@ -109,7 +117,6 @@ class GiziActivity : BaseActivity() {
     }
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun uploadImage() {
-        showProgressBar()
 
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
@@ -122,10 +129,14 @@ class GiziActivity : BaseActivity() {
                 requestImageFile
             )
 
+           progressBar.visibility = View.VISIBLE
+
             lifecycleScope.launch {
                 try {
                     val apiService = apiConfig.getApiService()
                     val successResponse = apiService.uploadImage(multipartBody)
+
+                    progressBar.visibility = View.INVISIBLE
 
                     if (successResponse.isSuccessful) {
                         val responseData = successResponse.body()
@@ -154,7 +165,7 @@ class GiziActivity : BaseActivity() {
                     // Handle other exceptions
                     showToast("Unexpected error: ${e.message}")
                 } finally {
-                    hideProgressBar()
+                    progressBar.visibility = View.INVISIBLE
                 }
             }
         } ?: showToast(getString(R.string.empty_image_warning))

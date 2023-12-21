@@ -27,10 +27,10 @@ class DetailAhliGiziActivity : AppCompatActivity() {
         if (receivedData != null) {
             binding.tvNamaDokter.text = receivedData.nama
             binding.tvRs.text = receivedData.RumahSakit
-            binding.btnTelp.text = receivedData.nomor
             binding.btnTelp.text = "Hubungi"
             binding.tvJadwal.text = receivedData.jadwal
             binding.tvPengalaman.text = receivedData.pengalaman
+            binding.tvAbout.text = receivedData.about
 
             Glide.with(this)
                 .load(receivedData.photo)
