@@ -19,7 +19,6 @@ import com.dicoding.bottomnavigationbar.databinding.FragmentHomeBinding
 import com.dicoding.bottomnavigationbar.ui.about.AboutActivity
 import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DaftarAhliGizi
 import com.dicoding.bottomnavigationbar.ui.daftarRS.DaftarRS
-import com.dicoding.bottomnavigationbar.ui.gizi.GiziActivity
 import com.dicoding.bottomnavigationbar.ui.stunting.StuntingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -49,7 +48,6 @@ class HomeFragment : Fragment() {
         val bmiButton = binding.bmiButton
         val cariAhliGizi = binding.cariAhliGizi
         val aboutbutton = binding.aboutbutton
-        val deteksiGizi = binding.deteksiGiziButton
 
 
 //        carouselView = binding.ivCarousel
@@ -79,9 +77,6 @@ class HomeFragment : Fragment() {
         }
         aboutbutton.setOnClickListener {
             startAbout()
-        }
-        deteksiGizi.setOnClickListener {
-            startGiziActivity()
         }
         showRecyclerList()
         return view
@@ -124,10 +119,6 @@ class HomeFragment : Fragment() {
     }
     private fun startAbout() {
         val intent = Intent(activity, AboutActivity::class.java)
-        startActivity(intent)
-    }
-    private fun startGiziActivity() {
-        val intent = Intent(activity, GiziActivity::class.java)
         startActivity(intent)
     }
 }

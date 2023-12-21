@@ -5,7 +5,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 class Retro {
     private val API_KEY = "1c0bceec225a018355a7adcec73356800aa2e2855ec014efc163fea621c6137d8a768745046a25b8" // Replace with your actual API key
@@ -33,6 +32,22 @@ class Retro {
             .client(client)
             .build()
     }
+
+//    private fun createOkHttpClients(): OkHttpClient {
+//        return OkHttpClient.Builder()
+//            .addInterceptor { chain ->
+//                val originalRequest = chain.request()
+//                val newUrl = originalRequest.url().newBuilder()
+//                    .build()
+//
+//                val newRequest = originalRequest.newBuilder()
+//                    .url(newUrl)
+//                    .build()
+//
+//                chain.proceed(newRequest)
+//            }
+//            .build()
+//    }
     private fun createOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
@@ -48,29 +63,6 @@ class Retro {
                 chain.proceed(newRequest)
             }
             .build()
-    }
-    fun getApiService(): UserApi {
-        val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                // Log the message as needed, for example, you can use Timber or println
-                println(message)
-            }
-        }).setLevel(HttpLoggingInterceptor.Level.BODY)
-
-        val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://modelimageclass-asuptnnvoa-as.a.run.app/api/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-
-        return retrofit.create(UserApi::class.java)
     }
 
 }
