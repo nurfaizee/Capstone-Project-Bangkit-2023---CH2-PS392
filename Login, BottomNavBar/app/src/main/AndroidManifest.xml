@@ -33,7 +33,7 @@
             android:name=".ui.about.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.fragment.DetailArtikelActivity"
+            android:name=".ui.daftarArtikel.DetailArtikelActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -56,10 +56,10 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ui.daftarAhliGizi.DetailAhliGiziActivity"
-            android:parentActivityName=".ui.fragment.SearchFragment">
+            android:parentActivityName=".ui.daftarArtikel.SearchFragment">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.fragment.SearchFragment" />
+                android:value=".ui.daftarArtikel.SearchFragment" />
         </activity>
         <activity
             android:name=".ui.daftarAhliGizi.DaftarAhliGizi"

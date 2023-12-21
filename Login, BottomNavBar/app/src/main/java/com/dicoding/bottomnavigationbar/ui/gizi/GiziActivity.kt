@@ -25,6 +25,7 @@ import com.dicoding.bottomnavigationbar.data.retrofit.Utils.getImageUri
 import com.dicoding.bottomnavigationbar.data.retrofit.Utils.reduceFileImage
 import com.dicoding.bottomnavigationbar.data.retrofit.Utils.uriToFile
 import com.dicoding.bottomnavigationbar.databinding.ActivityGiziBinding
+import com.dicoding.bottomnavigationbar.ui.login.BaseActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
@@ -32,30 +33,11 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 
-class GiziActivity : AppCompatActivity() {
-    private val ApiConfig = Retro()
+class GiziActivity : BaseActivity() {
+    private val apiConfig = Retro()
     private lateinit var binding: ActivityGiziBinding
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
-    }
-    private var currentImageUri: Uri? = null
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
-            }
-        }
-    private fun ActivityGiziBinding() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
-    @RequiresApi(Build.VERSION_CODES.Q)
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGiziBinding.inflate(layoutInflater)
@@ -67,7 +49,24 @@ class GiziActivity : AppCompatActivity() {
         binding.cameraButton.setOnClickListener { startCamera() }
         binding.uploadButton.setOnClickListener { uploadImage() }
 
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
     }
+    private var currentImageUri: Uri? = null
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
+            }
+        }
+
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
             this,
@@ -76,6 +75,12 @@ class GiziActivity : AppCompatActivity() {
     private fun startGallery() {
         launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
+
+    private fun startCamera() {
+        currentImageUri = getImageUri(this)
+        launcherIntentCamera.launch(currentImageUri)
+    }
+
     private val launcherGallery = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri: Uri? ->
@@ -86,10 +91,7 @@ class GiziActivity : AppCompatActivity() {
             Log.d("Photo Picker", "No media selected")
         }
     }
-    private fun startCamera() {
-        currentImageUri = getImageUri(this)
-        launcherIntentCamera.launch(currentImageUri)
-    }
+
     private val launcherIntentCamera = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { isSuccess ->
@@ -117,10 +119,11 @@ class GiziActivity : AppCompatActivity() {
                 imageFile.name,
                 requestImageFile
             )
-            val intent = Intent(this, GiziActivity::class.java)
+            showProgressBar()
+
             lifecycleScope.launch {
                 try {
-                    val apiService = ApiConfig.getApiService()
+                    val apiService = apiConfig.getApiService()
                     val successResponse = apiService.uploadImage(multipartBody)
 
                     if (successResponse.isSuccessful) {
@@ -141,18 +144,17 @@ class GiziActivity : AppCompatActivity() {
                     }
 
                     showToast(successResponse.toString())
-                    showLoading(false)
+                    hideProgressBar()
                 } catch (e: HttpException) {
                     // Handle HTTP exception
                     val errorBody = e.response()?.errorBody()?.string()
                     val errorResponse = Gson().fromJson(errorBody, FileResponse::class.java)
-
                     showToast("HTTP error: ${errorResponse}")
-                    showLoading(false)
+                    hideProgressBar()
                 } catch (e: Exception) {
                     // Handle other exceptions
                     showToast("Unexpected error: ${e.message}")
-                    showLoading(false)
+                    hideProgressBar()
                 }
             }
         } ?: showToast(getString(R.string.empty_image_warning))
@@ -160,9 +162,7 @@ class GiziActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressIndicator.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
+
     private fun getGiziValues(foodType: String): GiziValues {
         return when (foodType) {
             "Banana" -> GiziValues("Pisang", "10 gram", "5 gram", "20 IU", "2 mg", "15 mg", "10 gram")
@@ -208,5 +208,9 @@ class GiziActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    companion object {
+        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }

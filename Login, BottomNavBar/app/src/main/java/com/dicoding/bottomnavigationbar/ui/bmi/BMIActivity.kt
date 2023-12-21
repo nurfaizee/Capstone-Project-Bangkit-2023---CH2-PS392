@@ -1,5 +1,6 @@
 package com.dicoding.bottomnavigationbar.ui.bmi
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,10 +8,10 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.Toolbar
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.databinding.ActivityBmiBinding
 
+@SuppressLint("SetTextI18n")
 class BMIActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBmiBinding
@@ -100,17 +101,17 @@ class BMIActivity : AppCompatActivity() {
 
     private fun getMessage(category: String): String {
         return when (category) {
-            "Underweight" -> "saran if Underweight:Perbanyak asupan protein dan lemak untuk meningkatkan berat badan sikecil"
-            "Normal weight" -> "saran if normal Weight:Pertahankan asupan gizi sikecil untuk memenuhi tumbuh kembang yang baik"
-            "Excess weight" -> "saran if excess weight:Kurangi asupan lemak sikecil dan perbanyak asupan serat hijau"
-            "Obesity" -> "saran if obesity: kurangi asupan lemak si kecil dan jalani atur diet secara berkala"
-            "Extremely Obese" -> "saran if extremely: kurangi dan kontrol asupan lemak dan karbohidrat sikecil dan silahkan kunjungi rumah sakit terdekat"
+            "Underweight" -> "Perbanyak asupan protein dan lemak untuk meningkatkan berat badan"
+            "Normal weight" -> "Pertahankan asupan gizi untuk memenuhi tumbuh kembang yang baik"
+            "Excess weight" -> "Kurangi asupan lemak dan perbanyak asupan serat hijau"
+            "Obesity" -> "Kurangi asupan lemak si kecil dan jalani atur diet secara berkala"
+            "Extremely Obese" -> "Kurangi dan kontrol asupan lemak dan karbohidrat dan silahkan kunjungi rumah sakit terdekat"
             else -> ""
         }
     }
 
     private fun showResultDialog(resultText: String, message: String) {
-        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_bmi, null)
+        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_, null)
         val tvDialogTitle = dialogView.findViewById<TextView>(R.id.tvDialogTitle)
         val tvDialogMessage = dialogView.findViewById<TextView>(R.id.tvDialogMessage)
         val btnDialogOk = dialogView.findViewById<Button>(R.id.btnDialogOk)

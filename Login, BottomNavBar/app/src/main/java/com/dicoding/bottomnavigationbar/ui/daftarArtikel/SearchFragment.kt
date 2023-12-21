@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.fragment
+package com.dicoding.bottomnavigationbar.ui.daftarArtikel
 
 import android.content.Intent
 import android.os.Bundle
@@ -29,7 +29,6 @@ class SearchFragment : Fragment() {
         showRecyclerList()
 
         val searchView = binding.searchView
-
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

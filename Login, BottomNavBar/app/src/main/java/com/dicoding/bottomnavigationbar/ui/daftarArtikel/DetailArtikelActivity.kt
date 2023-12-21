@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.fragment
+package com.dicoding.bottomnavigationbar.ui.daftarArtikel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +14,10 @@ class DetailArtikelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailArtikelBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
 
         val artikel = intent.getParcelableExtra<Artikel>("DATA")
 

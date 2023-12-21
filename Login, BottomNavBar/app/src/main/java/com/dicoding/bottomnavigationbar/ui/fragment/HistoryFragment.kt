@@ -25,15 +25,11 @@ class HistoryFragment : Fragment() {
         binding.rvRiwayat.setHasFixedSize(true)
 //        binding.rvRiwayat.adapter = adapter
 
-
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
 
     }
     override fun onDestroyView() {

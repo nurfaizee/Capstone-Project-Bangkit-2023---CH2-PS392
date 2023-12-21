@@ -18,6 +18,7 @@ import com.dicoding.bottomnavigationbar.ui.bmi.BMIActivity
 import com.dicoding.bottomnavigationbar.databinding.FragmentHomeBinding
 import com.dicoding.bottomnavigationbar.ui.about.AboutActivity
 import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DaftarAhliGizi
+import com.dicoding.bottomnavigationbar.ui.daftarArtikel.DetailArtikelActivity
 import com.dicoding.bottomnavigationbar.ui.daftarRS.DaftarRS
 import com.dicoding.bottomnavigationbar.ui.gizi.GiziActivity
 import com.dicoding.bottomnavigationbar.ui.stunting.StuntingActivity

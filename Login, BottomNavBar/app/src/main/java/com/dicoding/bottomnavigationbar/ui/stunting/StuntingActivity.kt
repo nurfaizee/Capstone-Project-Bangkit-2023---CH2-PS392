@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +41,12 @@ class StuntingActivity : BaseActivity() {
             }
         }
         setupButtonListeners()
+
+
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun setupButtonListeners() {
@@ -204,19 +209,32 @@ class StuntingActivity : BaseActivity() {
 //    }
     private fun getMessage(category: String): String {
         return when (category) {
-            "Tidak_Berisiko" -> "Perbanyak asupan protein dan lemak untuk meningkatkan berat badan sikecil"
-            "Beresiko_Ringan" -> "Pertahankan asupan gizi sikecil untuk memenuhi tumbuh kembang yang baik"
-            "Beresiko_Sedang" -> "Kurangi asupan lemak sikecil dan perbanyak asupan serat hijau"
-            "Beresiko_Tinggi" -> "kurangi asupan lemak si kecil dan jalani atur diet secara berkala"
+            "Tidak_Berisiko" -> "1. Tetapkan pola makan yang sehat dan seimbang.\n" +
+                    "2. Ajarkan gaya hidup aktif dan bergerak.\n" +
+                    "3. Perhatikan pertumbuhan dan perkembangan anak secara berkala.\n" +
+                    "4. Lakukan pemeriksaan kesehatan rutin."
+            "Beresiko_Ringan" -> "1. Tingkatkan variasi dalam pola makan anak dengan memasukkan berbagai jenis makanan sehat.\n" +
+                    "2. Pastikan anak mendapatkan asupan nutrisi yang mencukupi untuk pertumbuhan dan perkembangannya.\n" +
+                    "3. Ajarkan kebiasaan hidup sehat, seperti olahraga teratur dan kebersihan diri.\n" +
+                    "4. Konsultasikan dengan dokter atau ahli gizi untuk saran lebih lanjut."
+            "Beresiko_Sedang" -> "1. Segera konsultasikan dengan dokter atau ahli gizi untuk penilaian lebih lanjut.\n" +
+                    "2. Ikuti saran dan rekomendasi yang diberikan oleh profesional kesehatan.\n" +
+                    "3. Pantau pola makan dan aktivitas anak secara ketat."
+            "Beresiko_Tinggi" -> "1. Segera konsultasikan dengan dokter atau spesialis gizi anak.\n" +
+                    "2. Ikuti rencana perawatan yang direkomendasikan.\n" +
+                    "3. Perluasan pemeriksaan kesehatan dan pemantauan secara teratur.\n" +
+                    "4. Libatkan dukungan dari keluarga dan lingkungan sekitar untuk mendukung perubahan gaya hidup dan pola makan anak.\n" +
+                    "5. Penting untuk dicatat bahwa saran ini bersifat umum, dan setiap anak mungkin memerlukan pendekatan yang disesuaikan dengan kebutuhan dan kondisi kesehatannya. Konsultasikan selalu dengan profesional kesehatan untuk panduan yang lebih spesifik."
 
             else -> ""
+
         }
     }
     private fun kategori(category: String, gender: String): String {
         val genderMessage = if (gender == "Perempuan") {
-            "Anak perempuan Anda "
+            "Anak perempuan anda "
         } else {
-            "Anak laki-laki Anda "
+            "Anak laki-laki anda "
         }
         return when (category) {
             "Tidak_Berisiko" -> "$genderMessage Tidak Berisiko"
@@ -228,7 +246,7 @@ class StuntingActivity : BaseActivity() {
         }
     }
     private fun showResultDialog(resultText: String, message: String) {
-        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_bmi, null)
+        val dialogView = layoutInflater.inflate(R.layout.custom_dialog_, null)
         val tvDialogTitle = dialogView.findViewById<TextView>(R.id.tvDialogTitle)
         val tvDialogMessage = dialogView.findViewById<TextView>(R.id.tvDialogMessage)
         val btnDialogOk = dialogView.findViewById<Button>(R.id.btnDialogOk)
@@ -247,9 +265,6 @@ class StuntingActivity : BaseActivity() {
         }
 
         dialog.show()
-    }
-    private fun showToasts(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }
