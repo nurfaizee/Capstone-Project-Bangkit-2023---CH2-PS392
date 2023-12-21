@@ -356,7 +356,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnSpan="1"
-                    android:layout_columnWeight="1">
+                    android:layout_columnWeight="1"
+                    android:layout_marginRight="8dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/circleImageView3"
@@ -386,7 +387,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnSpan="1"
                     android:layout_columnWeight="1"
-                    android:layout_marginStart="16dp">
+                    android:layout_marginLeft="8dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/circleImageView4"

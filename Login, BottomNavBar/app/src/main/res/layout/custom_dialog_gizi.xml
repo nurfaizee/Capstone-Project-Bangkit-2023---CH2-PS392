@@ -6,30 +6,43 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Add your custom UI components here -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kandungan Gizi"
+        android:gravity="center"
+        android:textStyle="bold"/>
+
     <TextView
         android:id="@+id/giziJudul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Lemak"
-        android:textColor="@android:color/black"
+        android:text="jenis"
+        android:textColor="@color/blue"
         android:textSize="30sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginVertical="10dp"
+        android:background="@color/blue"/>
+
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:alignmentMode="alignMargins"
-        android:columnCount="2">
+        android:columnCount="2"
+        android:rowCount="3">
 
         <!-- Lemak -->
-        <GridLayout
-            android:layout_width="160dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             android:layout_gravity="center"
-            android:alignmentMode="alignMargins"
-            android:columnCount="4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvLemakTitle"
@@ -38,6 +51,7 @@
                 android:gravity="center"
                 android:text="Lemak: "
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <TextView
@@ -47,16 +61,18 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
-        </GridLayout>
+        </LinearLayout>
 
         <!-- Protein -->
-        <GridLayout
-            android:layout_width="160dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:layout_gravity="center"
-            android:alignmentMode="alignMargins"
-            android:columnCount="4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvProteinTitle"
@@ -65,6 +81,7 @@
                 android:gravity="center"
                 android:text="Protein: "
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <TextView
@@ -74,16 +91,18 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
-        </GridLayout>
+        </LinearLayout>
 
         <!-- Vitamin A -->
-        <GridLayout
-            android:layout_width="160dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:layout_gravity="center"
-            android:alignmentMode="alignMargins"
-            android:columnCount="4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvVitaminATitle"
@@ -92,6 +111,7 @@
                 android:gravity="center"
                 android:text="Vitamin A: "
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <TextView
@@ -101,16 +121,18 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
-        </GridLayout>
+        </LinearLayout>
 
         <!-- Vitamin B -->
-        <GridLayout
-            android:layout_width="160dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:layout_gravity="center"
-            android:alignmentMode="alignMargins"
-            android:columnCount="4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvVitaminBTitle"
@@ -119,6 +141,7 @@
                 android:gravity="center"
                 android:text="Vitamin B: "
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <TextView
@@ -128,15 +151,17 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
-        </GridLayout>
+        </LinearLayout>
 
-        <GridLayout
-            android:layout_width="160dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:layout_gravity="center"
-            android:alignmentMode="alignMargins"
-            android:columnCount="4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvKalsiumTitle"
@@ -145,6 +170,7 @@
                 android:gravity="center"
                 android:text="Kalium: "
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <TextView
@@ -154,16 +180,18 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
-        </GridLayout>
+        </LinearLayout>
 
         <!-- Vitamin B -->
-        <GridLayout
-            android:layout_width="160dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
             android:layout_gravity="center"
-            android:alignmentMode="alignMargins"
-            android:columnCount="4">
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tvGulaitle"
@@ -172,6 +200,7 @@
                 android:gravity="center"
                 android:text="Gula: "
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
 
             <TextView
@@ -181,10 +210,9 @@
                 android:gravity="center"
                 android:text="-"
                 android:textColor="@android:color/black"
+                android:textStyle="bold"
                 android:textSize="15sp" />
-        </GridLayout>
-
-        <!-- Tambahkan variasi lainnya sesuai kebutuhan -->
+        </LinearLayout>
 
     </GridLayout>
 
