@@ -109,7 +109,6 @@ class GiziActivity : BaseActivity() {
     }
     @RequiresApi(Build.VERSION_CODES.Q)
     private fun uploadImage() {
-        showProgressBar()
         currentImageUri?.let { uri ->
             val imageFile = uriToFile(uri, this).reduceFileImage()
             Log.d("Image File", "showImage: ${imageFile.path}")
