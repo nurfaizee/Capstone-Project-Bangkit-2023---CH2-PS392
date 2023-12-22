@@ -17,6 +17,7 @@ interface UserApi {
         @Field("email") email: String?,
         @Field("password") password: String?,
     ): Call<LoginResponse>
+
     @FormUrlEncoded
     @POST("register?")
     fun register(
@@ -24,6 +25,7 @@ interface UserApi {
         @Field("email") email: String?,
         @Field("password") password: String?,
     ): Call<LoginResponse>
+
     @POST("predict")
     fun deteksiStunting(@Body request: StuntingRequest): Call<StuntingResponse>
 

@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.login
+package com.dicoding.bottomnavigationbar.ui
 
 import android.app.Activity
 import android.app.Dialog

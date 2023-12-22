@@ -7,14 +7,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.Window
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.LoginManager
 import com.dicoding.bottomnavigationbar.databinding.ActivitySplashScreenBinding
-import com.dicoding.bottomnavigationbar.ui.login.GetStartedActivity
 import com.dicoding.bottomnavigationbar.ui.login.SignInActivity
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth

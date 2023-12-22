@@ -2,21 +2,18 @@ package com.dicoding.bottomnavigationbar.ui.daftarAhliGizi
 
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.ahliGizi.AhliGizi
 import com.dicoding.bottomnavigationbar.data.ahliGizi.AhliGiziAdapter
 import com.dicoding.bottomnavigationbar.data.ahliGizi.DataAhliGizi
-import com.dicoding.bottomnavigationbar.data.artikel.Artikel
-import com.dicoding.bottomnavigationbar.data.artikel.ArtikelAdapter
 import com.dicoding.bottomnavigationbar.databinding.ActivityDaftarAhliGiziBinding
-import com.dicoding.bottomnavigationbar.ui.daftarArtikel.DetailArtikelActivity
 
+@Suppress("DEPRECATION")
 class DaftarAhliGizi : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarAhliGiziBinding
     private val list = DataAhliGizi.ahliGizi

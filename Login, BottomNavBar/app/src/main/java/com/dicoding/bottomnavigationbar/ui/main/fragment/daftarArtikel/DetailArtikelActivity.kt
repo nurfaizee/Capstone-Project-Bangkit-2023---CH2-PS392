@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.daftarArtikel
+package com.dicoding.bottomnavigationbar.ui.main.fragment.daftarArtikel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.dicoding.bottomnavigationbar.data.artikel.Artikel
 import com.dicoding.bottomnavigationbar.databinding.ActivityDetailArtikelBinding
 
+@Suppress("DEPRECATION")
 class DetailArtikelActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailArtikelBinding
 

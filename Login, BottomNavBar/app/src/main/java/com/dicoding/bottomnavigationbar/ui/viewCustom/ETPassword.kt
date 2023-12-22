@@ -15,7 +15,7 @@ import com.dicoding.bottomnavigationbar.R
 
 class ETPassword : AppCompatEditText, View.OnTouchListener {
 
-    var isPasswordValid: Boolean = false
+    private var isPasswordValid: Boolean = false
 
     init {
         init()

@@ -16,7 +16,7 @@
             android:id="@+id/iv_rs"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:paddingRight="4dp"
+            android:paddingEnd="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"

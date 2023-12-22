@@ -4,8 +4,6 @@ plugins {
     id("com.google.gms.google-services")
     id("kotlin-parcelize")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
-//    id("com.google.devtools.ksp")
-
 }
 
 android {
@@ -47,14 +45,10 @@ android {
 
 dependencies {
     implementation("androidx.room:room-runtime:2.5.2")
-//    ksp("androidx.room:room-compiler:2.5.2")
     val cameraxVersion = "1.2.3"
     implementation("androidx.camera:camera-camera2:$cameraxVersion")
     implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
     implementation("androidx.camera:camera-view:$cameraxVersion")
-
-
-
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

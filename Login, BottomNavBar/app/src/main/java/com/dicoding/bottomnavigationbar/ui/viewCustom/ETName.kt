@@ -10,7 +10,7 @@ import com.dicoding.bottomnavigationbar.R
 
 class ETName : AppCompatEditText, View.OnFocusChangeListener {
 
-    var isNameValid = false
+    private var isNameValid = false
 
     constructor(context: Context) : super(context) {
         init()

@@ -16,6 +16,7 @@ import com.dicoding.bottomnavigationbar.data.retrofit.LoginResponse
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignInBinding
 import com.dicoding.bottomnavigationbar.data.retrofit.Retro
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
+import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -31,6 +32,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("ControlFlowWithEmptyBody")
 class SignInActivity : BaseActivity() {
 
     private var binding : ActivitySignInBinding? = null

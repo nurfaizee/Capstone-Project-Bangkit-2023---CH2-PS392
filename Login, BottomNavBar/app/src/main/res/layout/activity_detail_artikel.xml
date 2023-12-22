@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.daftarArtikel.DetailArtikelActivity">
+    tools:context=".ui.main.fragment.daftarArtikel.DetailArtikelActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.daftarArtikel.DetailArtikelActivity">
+            tools:context=".ui.main.fragment.daftarArtikel.DetailArtikelActivity">
 
             <ImageView
                 android:id="@+id/iv_artikel"

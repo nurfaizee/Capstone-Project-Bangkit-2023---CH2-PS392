@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.daftarArtikel
+package com.dicoding.bottomnavigationbar.ui.main.fragment.daftarArtikel
 
 import android.content.Intent
 import android.os.Bundle
@@ -21,7 +21,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
 

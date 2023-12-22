@@ -27,9 +27,6 @@ class AboutActivity : AppCompatActivity() {
         binding.circleImageView4.setOnClickListener {
             startPartnership()
         }
-
-
-
     }
 
     private fun startFeedback() {

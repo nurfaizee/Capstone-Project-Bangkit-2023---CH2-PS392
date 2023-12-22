@@ -92,6 +92,5 @@ object DataAhliGizi {
             "10 Tahun",
             "Dr. Lina dari Rs. Sehat Terang mendapat penghargaan atas komitmennya dalam memberikan edukasi gizi kepada masyarakat sehingga meningkatkan kesadaran gizi."
         )
-        // Tambahkan data ahli gizi lainnya sesuai kebutuhan
     )
 }

@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.fragment
+package com.dicoding.bottomnavigationbar.ui.main.fragment
 
 import android.content.Intent
 import android.net.Uri
@@ -20,7 +20,7 @@ import com.dicoding.bottomnavigationbar.ui.bmi.BMIActivity
 import com.dicoding.bottomnavigationbar.databinding.FragmentHomeBinding
 import com.dicoding.bottomnavigationbar.ui.about.AboutActivity
 import com.dicoding.bottomnavigationbar.ui.daftarAhliGizi.DaftarAhliGizi
-import com.dicoding.bottomnavigationbar.ui.daftarArtikel.DetailArtikelActivity
+import com.dicoding.bottomnavigationbar.ui.main.fragment.daftarArtikel.DetailArtikelActivity
 import com.dicoding.bottomnavigationbar.ui.daftarRS.DaftarRS
 import com.dicoding.bottomnavigationbar.ui.gizi.GiziActivity
 import com.dicoding.bottomnavigationbar.ui.stunting.StuntingActivity
@@ -36,13 +36,12 @@ class HomeFragment : Fragment() {
     private lateinit var auth : FirebaseAuth
     private val list = DataArtikel.artikel
     private val imageArray:ArrayList<Int> = ArrayList()
-//    private val carouselview:CarouselView?=null
     private val loginManager: LoginManager by lazy { LoginManager(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         auth = Firebase.auth
         val view = binding.root
@@ -58,19 +57,16 @@ class HomeFragment : Fragment() {
             startEvent()
         }
 
-
-//        carouselView = binding.ivCarousel
         imageArray.add(R.drawable.img_iklan_capstone)
         lifecycleScope.launch {
-            // Observe username changes
             loginManager.usernameFlow.collect { username ->
-                binding?.tv1?.text = username ?: "No username available"
+                binding.tv1.text = username ?: "No username available"
             }
         }
         val currentUser = auth.currentUser
 
         currentUser?.let {
-            binding?.tv1?.text = currentUser.displayName ?: "No username available"
+            binding.tv1.text = currentUser.displayName ?: "No username available"
         }
         stuntingbutton.setOnClickListener {
             startStuntingActivity()
@@ -139,17 +135,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun startEvent() {
-        val websiteUri = Uri.parse("https://docs.google.com/forms/d/1ao24C5zW97MEty3F5V0gADBpjHmSB06guL5kmplzOr0/edit") // Ganti URL sesuai kebutuhan
+        val websiteUri = Uri.parse("https://docs.google.com/forms/d/1ao24C5zW97MEty3F5V0gADBpjHmSB06guL5kmplzOr0/edit")
 
         val intent = Intent(Intent.ACTION_VIEW)
 
-        // Memeriksa apakah terdapat aplikasi yang dapat menangani intent ini
         if (activity?.let { intent.resolveActivity(it.packageManager) } != null) {
             intent.data = Uri.parse(websiteUri.toString())
             startActivity(intent)
 
         } else {
-            // Jika tidak ada aplikasi yang dapat menangani intent, Anda dapat memberikan pesan atau menggunakan fallback lainnya.
             Toast.makeText(activity, "Tidak ada aplikasi yang dapat menangani intent ini.", Toast.LENGTH_SHORT).show()
         }
     }

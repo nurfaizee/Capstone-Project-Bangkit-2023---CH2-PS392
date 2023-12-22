@@ -13,7 +13,7 @@ import com.dicoding.bottomnavigationbar.R
 
 class ETEmail : AppCompatEditText, View.OnFocusChangeListener {
 
-    var isEmailValid = false
+    private var isEmailValid = false
     private lateinit var emailSame: String
     private var isEmailHasTaken = false
 
@@ -83,16 +83,6 @@ class ETEmail : AppCompatEditText, View.OnFocusChangeListener {
     private fun validateEmailHasTaken() {
         error = if (isEmailHasTaken && text.toString().trim() == emailSame) {
             resources.getString(R.string.emailTaken)
-        } else {
-            null
-        }
-    }
-
-    fun setErrorMessage(message: String, email: String) {
-        emailSame = email
-        isEmailHasTaken = true
-        error = if (text.toString().trim() == emailSame) {
-            message
         } else {
             null
         }

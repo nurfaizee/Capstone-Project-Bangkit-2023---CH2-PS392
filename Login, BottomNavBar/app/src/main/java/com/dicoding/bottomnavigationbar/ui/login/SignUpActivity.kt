@@ -13,7 +13,7 @@ import com.dicoding.bottomnavigationbar.data.retrofit.LoginResponse
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignUpBinding
 import com.dicoding.bottomnavigationbar.data.retrofit.Retro
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
-import com.dicoding.bottomnavigationbar.data.retrofit.UsersResponse
+import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

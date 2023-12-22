@@ -1,11 +1,9 @@
 package com.dicoding.bottomnavigationbar.ui.gizi
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,7 +24,7 @@ import com.dicoding.bottomnavigationbar.data.retrofit.Utils.getImageUri
 import com.dicoding.bottomnavigationbar.data.retrofit.Utils.reduceFileImage
 import com.dicoding.bottomnavigationbar.data.retrofit.Utils.uriToFile
 import com.dicoding.bottomnavigationbar.databinding.ActivityGiziBinding
-import com.dicoding.bottomnavigationbar.ui.login.BaseActivity
+import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
@@ -34,6 +32,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 
+@Suppress("DEPRECATION")
 class GiziActivity : BaseActivity() {
     private val apiConfig = Retro()
     private lateinit var binding: ActivityGiziBinding
@@ -108,7 +107,6 @@ class GiziActivity : BaseActivity() {
         }
     }
 
-    //
     private fun showImage() {
         currentImageUri?.let {
             Log.d("Image URI", "showImage: $it")
@@ -142,27 +140,24 @@ class GiziActivity : BaseActivity() {
                         val responseData = successResponse.body()
                         val hasil = responseData?.predictedClass
                         if (responseData != null) {
-                            println("Upload successful. Server response: ${responseData}")
+                            println("Upload successful. Server response: $responseData")
                         } else {
                             println("Upload successful. No additional data from the server.")
                         }
                         showResultDialog(hasil)
                     } else {
-                        // Handle unsuccessful response
                         val errorBody = successResponse.errorBody()?.string()
                         val errorResponse = Gson().fromJson(errorBody, FileResponse::class.java)
 
-                        showToast("Upload failed. Server error: ${errorResponse}")
+                        showToast("Upload failed. Server error: $errorResponse")
                     }
 
                     showToast(successResponse.toString())
                 } catch (e: HttpException) {
-                    // Handle HTTP exception
                     val errorBody = e.response()?.errorBody()?.string()
                     val errorResponse = Gson().fromJson(errorBody, FileResponse::class.java)
-                    showToast("HTTP error: ${errorResponse}")
+                    showToast("HTTP error: $errorResponse")
                 } catch (e: Exception) {
-                    // Handle other exceptions
                     showToast("Unexpected error: ${e.message}")
                 } finally {
                     progressBar.visibility = View.INVISIBLE
@@ -197,10 +192,8 @@ class GiziActivity : BaseActivity() {
         val tvGulaValue = dialogView.findViewById<TextView>(R.id.tvGulaValue)
         val btnDialogOk = dialogView.findViewById<Button>(R.id.btnDialogOk)
 
-        // Mendapatkan nilai gizi berdasarkan tipe makanan
         val giziValues = getGiziValues(resultText.orEmpty())
 
-        // Mengisi nilai gizi ke dalam TextView
         giziJudul.text = giziValues.foodName
         tvLemakValue.text = giziValues.lemak
         tvProteinValue.text = giziValues.protein

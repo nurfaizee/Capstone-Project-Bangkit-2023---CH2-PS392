@@ -14,17 +14,17 @@ import com.dicoding.bottomnavigationbar.data.retrofit.StuntingRequest
 import com.dicoding.bottomnavigationbar.data.retrofit.StuntingResponse
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
 import com.dicoding.bottomnavigationbar.databinding.ActivityStuntingBinding
-import com.dicoding.bottomnavigationbar.ui.login.BaseActivity
+import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+@Suppress("DEPRECATION")
 @SuppressLint("SetTextI18n")
 class StuntingActivity : BaseActivity() {
     private lateinit var binding: ActivityStuntingBinding
     private var selectedGender: String = ""
     private lateinit var viewModel: StuntingViewModel
-//    private var userData: UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,13 +57,11 @@ class StuntingActivity : BaseActivity() {
         binding.btnDecreaseTinggi.setOnClickListener { decreaseHeight() }
         binding.btnIncreaseUmur.setOnClickListener { increaseAge() }
         binding.btnDecreaseUmur.setOnClickListener { decreaseAge() }
-        // Listener untuk btnLakilaki
+
         binding.btnLakilaki.setOnClickListener {
             selectedGender = "Laki-laki"
             updateGenderButtons()
         }
-
-        // Listener untuk btnPerempuan
         binding.btnPerempuan.setOnClickListener {
             selectedGender = "Perempuan"
             updateGenderButtons()
@@ -142,7 +140,6 @@ class StuntingActivity : BaseActivity() {
     private fun sendData(jenisKelamin: String, tinggiBadan: Int, beratBadan: Int, usia: Int) {
         val retro = Retro().getRetroClientInstanceStunting().create(UserApi::class.java)
 
-        // Log request information
         Log.d("SendData", "Sending request to deteksiStunting:")
         Log.d("SendData", "  Jenis Kelamin: $jenisKelamin")
         Log.d("SendData", "  Tinggi Badan: $tinggiBadan")
@@ -150,62 +147,32 @@ class StuntingActivity : BaseActivity() {
         Log.d("SendData", "  Usia: $usia")
         val request = StuntingRequest(jenisKelamin, tinggiBadan, beratBadan, usia)
 
-        // Execute the network request asynchronously
-        val call = retro.deteksiStunting(request)
+        retro.deteksiStunting(request)
 
-        // Execute the network request asynchronously
         retro.deteksiStunting(request).enqueue(object : Callback<StuntingResponse> {
             override fun onResponse(call: Call<StuntingResponse>, response: Response<StuntingResponse>) {
                 hideProgressBar()
                 if (response.isSuccessful) {
-                    // Handle successful response
                     val responseData = response.body()
                     val prediksi = responseData?.prediction
                     val hasil = kategori("$prediksi", selectedGender)
                     if (responseData != null) {
-                        val resultText = "Predictions: $prediksi"
                         Log.d("SendData", "  kode: $response")
                         Log.d("SendData", " $responseData")
 
-                        // Simpan data ke dalam database
-//                        userData.let { userData ->
-//                            userData?.berat = beratBadan
-//                            userData?.tinggi = tinggiBadan
-//                            userData?.umur = usia
-//                            userData?.gender = jenisKelamin
-//                            userData?.hasil = prediksi
-//
-//                        }
-//                        saveToDatabase()
-//                        showToasts(getString(R.string.added))
-
                         showResultDialog(hasil, getMessage("$prediksi"))
-                    } else {
-                        // Tangani jika data yang diharapkan null
                     }
                 } else {
-
-                    val errorCode = response.code()
-                    val errorMessage = response.message()
-                    // Lakukan sesuatu dengan informasi kesalahan
+                    response.code()
+                    response.message()
                 }
             }
 
             override fun onFailure(call: Call<StuntingResponse>, t: Throwable) {
                 hideProgressBar()
-                // Handle network request failure
-                // t.printStackTrace() jika Anda ingin mencetak detail kesalahan
             }
         })
     }
-
-    // Fungsi untuk menyimpan data ke dalam database
-//    private fun saveToDatabase() {
-//        userData.let { userData->
-//            userData?.tanggal= DateHelper.getCurrentDate()
-//        }
-//        viewModel.insert(userData as UserData)
-//    }
     private fun getMessage(category: String): String {
         return when (category) {
             "Tidak_Berisiko" -> "1. Tetapkan pola makan yang sehat dan seimbang.\n" +

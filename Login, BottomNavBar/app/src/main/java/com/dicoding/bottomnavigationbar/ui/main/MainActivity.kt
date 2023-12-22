@@ -5,12 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.databinding.ActivityMainBinding
-import com.dicoding.bottomnavigationbar.ui.fragment.HistoryFragment
-import com.dicoding.bottomnavigationbar.ui.fragment.HomeFragment
-import com.dicoding.bottomnavigationbar.ui.daftarArtikel.SearchFragment
-import com.dicoding.bottomnavigationbar.ui.fragment.ProfileFragment
+import com.dicoding.bottomnavigationbar.ui.main.fragment.HomeFragment
+import com.dicoding.bottomnavigationbar.ui.main.fragment.daftarArtikel.SearchFragment
+import com.dicoding.bottomnavigationbar.ui.main.fragment.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 
  class MainActivity : AppCompatActivity() {
 
@@ -34,10 +32,6 @@ import com.google.firebase.auth.FirebaseAuth
                     replaceFragment(SearchFragment())
                     true
                 }
-//                R.id.bottom_favorite -> {
-//                    replaceFragment(HistoryFragment())
-//                    true
-//                }
                 R.id.bottom_profile -> {
                     replaceFragment(ProfileFragment())
                     true

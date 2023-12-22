@@ -1,4 +1,4 @@
-package com.dicoding.bottomnavigationbar.ui.fragment
+package com.dicoding.bottomnavigationbar.ui.main.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -35,7 +35,6 @@ class ProfileFragment : Fragment() {
             }
         }
         lifecycleScope.launch {
-            // Observe username changes
             loginManager.emailFlow.collect { email ->
                 binding?.tvEmail?.text = email ?: "No email available"
             }
@@ -60,10 +59,10 @@ class ProfileFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Logout")
         builder.setMessage("Are you sure you want to logout?")
-        builder.setPositiveButton("Yes") { dialog, which ->
+        builder.setPositiveButton("Yes") { _, _ ->
             logoutUser()
         }
-        builder.setNegativeButton("No") { dialog, which ->
+        builder.setNegativeButton("No") { dialog, _ ->
             dialog.dismiss()
         }
 
@@ -87,7 +86,6 @@ class ProfileFragment : Fragment() {
                     navigateToSignInActivity()
                 }
                 else -> {
-                    // Handle the case when neither Firebase Auth nor LoginManager has a logged-in user
                     Log.d("ProfileFragment", "No user is logged in.")
                 }
             }

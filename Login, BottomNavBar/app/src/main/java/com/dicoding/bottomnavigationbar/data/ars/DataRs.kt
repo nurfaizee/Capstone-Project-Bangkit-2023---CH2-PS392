@@ -16,7 +16,7 @@ object DataRs {
         Rs(
             "RS Sehat",
             "Merupakan Rumah Sakit Terbesar di Jawa Timur",
-            "Jl. Puspa Indah No.123, Jakarta",
+            "Jl. Puspa Indah No.123, Bekasi",
             "20",
             "24 jam",
             "0895389528226",
@@ -27,7 +27,7 @@ object DataRs {
         Rs(
             "RS Sentosa",
             "Menyediakan Pelayanan Kesehatan Terbaik",
-            "Jl. Kesehatan Sejahtera No.456, Jakarta",
+            "Jl. Kesehatan Sejahtera No.456, Jember",
             "15",
             "08:00-17:00",
             "08819891602",
@@ -38,7 +38,7 @@ object DataRs {
         Rs(
             "RS Sejahtera",
             "Pusat Pelayanan Kesehatan Keluarga",
-            "Jl. Harmoni Makmur No.789, Jakarta",
+            "Jl. Harmoni Makmur No.789, Pamulang",
             "25",
             "24 jam",
             "089712345678",
@@ -49,7 +49,7 @@ object DataRs {
         Rs(
             "RS Murni",
             "Mengutamakan Kualitas Pelayanan",
-            "Jl. Pusaka Sakti No.321, Jakarta",
+            "Jl. Pusaka Sakti No.321, Cikarang",
             "18",
             "08:00-18:00",
             "081234567890",
@@ -60,7 +60,7 @@ object DataRs {
         Rs(
             "RS Cemerlang",
             "Pelayanan Prima untuk Kesehatan Anda",
-            "Jl. Kesehatan Bahagia No.555, Jakarta",
+            "Jl. Kesehatan Bahagia No.555, Tanggerang",
             "22",
             "24 jam",
             "087654321098",
@@ -82,7 +82,7 @@ object DataRs {
         Rs(
             "RS Bersih",
             "Komitmen untuk Kebersihan dan Kesehatan",
-            "Jl. Bersih Sejahtera No.456, Jakarta",
+            "Jl. Bersih Sejahtera No.456, Pacitan",
             "16",
             "24 jam",
             "089876543210",
@@ -93,7 +93,7 @@ object DataRs {
         Rs(
             "RS Damai",
             "Memberikan Ketenangan dalam Pelayanan",
-            "Jl. Damai Indah No.321, Jakarta",
+            "Jl. Damai Indah No.321, Malang",
             "21",
             "08:00-22:00",
             "085432109876",
@@ -104,7 +104,7 @@ object DataRs {
         Rs(
             "RS Sejahtera",
             "Dedikasi untuk Kesehatan Masyarakat",
-            "Jl. Puspa Sehat No.555, Jakarta",
+            "Jl. Puspa Sehat No.555, Tegal",
             "23",
             "24 jam",
             "081987654321",
@@ -112,7 +112,6 @@ object DataRs {
             "-6.2087635",
             "106.845599"
         )
-        // Tambahkan data rumah sakit lainnya sesuai kebutuhan
     )
 
 }
