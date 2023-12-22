@@ -15,6 +15,7 @@ import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.R
@@ -24,7 +25,6 @@ import com.dicoding.bottomnavigationbar.data.retrofit.Utils.getImageUri
 import com.dicoding.bottomnavigationbar.data.retrofit.Utils.reduceFileImage
 import com.dicoding.bottomnavigationbar.data.retrofit.Utils.uriToFile
 import com.dicoding.bottomnavigationbar.databinding.ActivityGiziBinding
-import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
@@ -33,7 +33,7 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.HttpException
 
 @Suppress("DEPRECATION")
-class GiziActivity : BaseActivity() {
+class GiziActivity : AppCompatActivity() {
     private val apiConfig = Retro()
     private lateinit var binding: ActivityGiziBinding
     private lateinit var progressBar: ProgressBar

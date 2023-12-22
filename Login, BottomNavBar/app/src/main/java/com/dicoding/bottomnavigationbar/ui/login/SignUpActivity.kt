@@ -7,13 +7,16 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.data.LoginManager
 import com.dicoding.bottomnavigationbar.data.retrofit.LoginResponse
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignUpBinding
 import com.dicoding.bottomnavigationbar.data.retrofit.Retro
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
-import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,11 +26,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignUpActivity : BaseActivity() {
+class SignUpActivity : AppCompatActivity() {
 
     private var binding : ActivitySignUpBinding? = null
     private lateinit var auth : FirebaseAuth
     private val loginManager by lazy { LoginManager(this) }
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +54,7 @@ class SignUpActivity : BaseActivity() {
             }
             binding?.etSinUpPassword?.text?.let { binding?.etSinUpPassword?.setSelection(it.length) }
         }
+        progressBar = binding!!.progressBar
 
     }
 
@@ -64,7 +69,7 @@ class SignUpActivity : BaseActivity() {
                 Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     if (response.isSuccessful) {
-                        showProgressBar()
+                        progressBar.visibility = View.VISIBLE
                         val loginResponse = response.body()
 
                         if (loginResponse != null) {
@@ -76,28 +81,24 @@ class SignUpActivity : BaseActivity() {
                                 }
                                 startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
                                 val token = loginResponse.data.accessToken
-                                showToast(this@SignUpActivity, "$token")
-                                showToast(this@SignUpActivity, "User Id Created Successfully")
-                                hideProgressBar()
+                                showToast("$token")
+                                showToast("User Id Created Successfully")
+                                progressBar.visibility = View.INVISIBLE
                                 finish()
-                                // Process the data
                             } else {
-                                showToast(this@SignUpActivity, "User Id Not Created. Try Again Later")
-                                hideProgressBar()
-                                // Handle null user in the response body
+                                showToast("User Id Not Created. Try Again Later")
+                                progressBar.visibility = View.INVISIBLE
                             }
                         } else {
-                            showToast(this@SignUpActivity, "gagal")
-                            hideProgressBar()                            // Handle null response body
+                            showToast("gagal")
+                            progressBar.visibility = View.INVISIBLE
                         }
                     } else {
-                        showToast(this@SignUpActivity, "Email/Nama Data Sudah ada")
-                        hideProgressBar()
+                        showToast("Email/Nama Data Sudah ada")
+                        progressBar.visibility = View.INVISIBLE
                     }
                 }
-
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    // Handle failure
                     Log.e("Error", t.message!!)
                 }
             })
@@ -121,5 +122,8 @@ class SignUpActivity : BaseActivity() {
             }
             else -> { true }
         }
+    }
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

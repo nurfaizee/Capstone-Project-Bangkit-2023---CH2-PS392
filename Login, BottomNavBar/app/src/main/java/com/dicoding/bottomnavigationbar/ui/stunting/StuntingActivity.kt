@@ -3,9 +3,13 @@ package com.dicoding.bottomnavigationbar.ui.stunting
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.bottomnavigationbar.R
@@ -14,17 +18,17 @@ import com.dicoding.bottomnavigationbar.data.retrofit.StuntingRequest
 import com.dicoding.bottomnavigationbar.data.retrofit.StuntingResponse
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
 import com.dicoding.bottomnavigationbar.databinding.ActivityStuntingBinding
-import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Suppress("DEPRECATION")
 @SuppressLint("SetTextI18n")
-class StuntingActivity : BaseActivity() {
+class StuntingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStuntingBinding
     private var selectedGender: String = ""
     private lateinit var viewModel: StuntingViewModel
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +46,11 @@ class StuntingActivity : BaseActivity() {
         }
         setupButtonListeners()
 
-
         binding.btnBack.setOnClickListener {
             onBackPressed()
         }
+
+        progressBar = binding.progressBar
 
     }
 
@@ -112,7 +117,7 @@ class StuntingActivity : BaseActivity() {
 
     private fun detectStunting() {
         if (isDataValid()) {
-            showProgressBar()
+            progressBar.visibility = View.VISIBLE
 
             val weight = binding.etBerat.text.toString().toIntOrNull() ?: 0
             val height = binding.etTinggibadan.text.toString().toIntOrNull() ?: 0
@@ -126,7 +131,7 @@ class StuntingActivity : BaseActivity() {
             Log.d("SendData", "  Usia: $age")
 
             sendData(selectedGender, height, weight, age)
-        } else showToast(this, "Lengkapi Data")
+        } else showToast("Lengkapi Data")
     }
     private fun isDataValid(): Boolean {
         return (
@@ -151,7 +156,7 @@ class StuntingActivity : BaseActivity() {
 
         retro.deteksiStunting(request).enqueue(object : Callback<StuntingResponse> {
             override fun onResponse(call: Call<StuntingResponse>, response: Response<StuntingResponse>) {
-                hideProgressBar()
+                progressBar.visibility = View.INVISIBLE
                 if (response.isSuccessful) {
                     val responseData = response.body()
                     val prediksi = responseData?.prediction
@@ -169,7 +174,7 @@ class StuntingActivity : BaseActivity() {
             }
 
             override fun onFailure(call: Call<StuntingResponse>, t: Throwable) {
-                hideProgressBar()
+                progressBar.visibility = View.INVISIBLE
             }
         })
     }
@@ -231,6 +236,10 @@ class StuntingActivity : BaseActivity() {
         }
 
         dialog.show()
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

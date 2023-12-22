@@ -8,7 +8,11 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.util.Patterns
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.bottomnavigationbar.R
 import com.dicoding.bottomnavigationbar.data.LoginManager
@@ -16,7 +20,6 @@ import com.dicoding.bottomnavigationbar.data.retrofit.LoginResponse
 import com.dicoding.bottomnavigationbar.databinding.ActivitySignInBinding
 import com.dicoding.bottomnavigationbar.data.retrofit.Retro
 import com.dicoding.bottomnavigationbar.data.retrofit.UserApi
-import com.dicoding.bottomnavigationbar.ui.BaseActivity
 import com.dicoding.bottomnavigationbar.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -32,13 +35,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-@Suppress("ControlFlowWithEmptyBody")
-class SignInActivity : BaseActivity() {
+class SignInActivity : AppCompatActivity() {
 
     private var binding : ActivitySignInBinding? = null
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val loginManager by lazy { LoginManager(this) }
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,13 +79,13 @@ class SignInActivity : BaseActivity() {
             }
             binding?.etSinInPassword?.text?.let { binding?.etSinInPassword?.setSelection(it.length) }
         }
+        progressBar = binding!!.progressBar
 
     }
     private fun signInUser() {
 
         val email = binding?.etSinInEmail?.text.toString()
         val password = binding?.etSinInPassword?.text.toString()
-//        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
 
         if (validateForm(email, password)) {
             val retro = Retro().getRetroClientInstance().create(UserApi::class.java)
@@ -100,24 +103,14 @@ class SignInActivity : BaseActivity() {
 
                                 lifecycleScope.launch {
                                     loginManager.saveLoginData(user.email ?: "", loginResponse.data.accessToken ?: "",user.username?:"")
-                                    // Start MainActivity
                                     startActivity(Intent(this@SignInActivity, MainActivity::class.java))
                                     Log.i("username", user.username!!)
-//                                    Log.i("token", userResponse.accessToken!!)
 
                                     Log.i("email", user.email!!)
+                                    showToast("Selamat Datang ${user.username}")
                                 }
                             }
-                            else{
-
-                            }
                         }
-                        else{
-
-                        }
-                    }
-                    else{
-
                     }
                 }
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
@@ -150,29 +143,29 @@ class SignInActivity : BaseActivity() {
             if (account!=null){
                 updateUI(account)
             } else {
-                showToast(this, "Google Sign-In failed. Please try again.")
+                showToast("Google Sign-In failed. Please try again.")
             }
         }
         else
         {
-            showToast(this, "Sign In Failed, Try Again Later")
+            showToast("Sign In Failed, Try Again Later")
         }
     }
 
     private fun updateUI(account: GoogleSignInAccount){
-        showProgressBar()
+        progressBar.visibility = View.VISIBLE
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful)
             {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-                hideProgressBar()
+                progressBar.visibility = View.INVISIBLE
             }
             else
             {
-                showToast(this, "Can't login currently, Try after sometime")
-                hideProgressBar()
+                showToast("Can't login currently, Try after sometime")
+                progressBar.visibility = View.INVISIBLE
             }
         }
     }
@@ -193,5 +186,9 @@ class SignInActivity : BaseActivity() {
                 true
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
