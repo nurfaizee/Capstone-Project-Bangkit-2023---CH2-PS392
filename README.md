@@ -10,4 +10,4 @@ Denting app : Stunting Detection Application to Help Parents in Detecting the Ri
 5. find hospital
 6. find a nutritionist
 ## User Inteface
-
+![alt text](https://github.com/whdwananto/Capstone-Project-Bangkit-2023---CH2-PS392/blob/main/Screenshot%202023-12-22%20at%2014.51.10.png?raw=true)
